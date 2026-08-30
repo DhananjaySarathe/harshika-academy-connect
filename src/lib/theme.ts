@@ -2,8 +2,8 @@ export type Theme = "dark" | "light";
 
 export const THEME_STORAGE_KEY = "harshika-theme";
 
-/** Dark is the brand default; light is opt-in. */
-export const DEFAULT_THEME: Theme = "dark";
+/** Light is the default; dark is opt-in via the header switch. */
+export const DEFAULT_THEME: Theme = "light";
 
 const THEME_COLOR = { dark: "#0B0E14", light: "#FCFAF6" } as const;
 
@@ -38,9 +38,9 @@ export function storeTheme(theme: Theme) {
 }
 
 /**
- * Runs inline in <head>, before first paint, so a visitor who chose light mode
- * never sees a flash of the dark theme while React hydrates. Kept as a string
- * because it has to execute ahead of the bundle.
+ * Runs inline in <head>, before first paint, so a visitor who opted into a
+ * non-default theme never sees a flash of the other one while React hydrates.
+ * Kept as a string because it has to execute ahead of the bundle.
  */
 export const themeInitScript = `(function(){try{var t=localStorage.getItem(${JSON.stringify(
   THEME_STORAGE_KEY,

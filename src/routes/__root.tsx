@@ -82,7 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: seo.description },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "theme-color", content: "#0B0E14" },
+      { name: "theme-color", content: "#FCFAF6" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -108,10 +108,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" data-theme="dark" className="dark">
+    // The inline theme script rewrites data-theme/class on <html> before React
+    // hydrates, which React would otherwise report as a mismatch on every load
+    // for anyone who opted into the non-default theme.
+    <html lang="en" data-theme="light" suppressHydrationWarning>
       <head>
-        {/* Runs before first paint so a visitor who picked light mode never
-            sees a flash of dark while the bundle loads. */}
+        {/* Runs before first paint so a visitor who opted into a non-default
+            theme never sees a flash of the other one while the bundle loads. */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <HeadContent />
       </head>

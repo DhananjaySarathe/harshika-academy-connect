@@ -80,7 +80,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:title", content: seo.title },
       { name: "twitter:description", content: seo.description },
       { name: "geo.placename", content: `${academy.locality}, ${academy.region}` },
-      { name: "theme-color", content: "#0B0E14" },
+      { name: "theme-color", content: "#FCFAF6" },
     ],
     scripts: [
       {
