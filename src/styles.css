@@ -29,16 +29,41 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
+  /* --- / theme. These flip between dark and light; see [data-theme]. ------
+     --gold is the readable accent (text, borders, tints) and darkens on light.
+     --gold-fill is the button fill and stays bright in both modes, because
+     --on-gold sits on top of it and must always be near-black. */
+  --color-page: var(--page);
+  --color-panel: var(--panel);
+  --color-heading: var(--heading);
+  --color-body: var(--body);
+  --color-on-gold: var(--on-gold);
+  --color-gold-fill: var(--gold-fill);
+  --color-gold-fill-strong: var(--gold-fill-strong);
   --color-gold: var(--gold);
   --color-gold-bright: var(--gold-bright);
   --color-gold-deep: var(--gold-deep);
-  --color-paper: var(--paper);
-  --color-muted-copy: var(--muted-copy);
-  --font-display: "Anton", sans-serif;
-  --font-body: "Plus Jakarta Sans", sans-serif;
-  --font-utility: "Inter", sans-serif;
+  --font-display: "Anton", "Archivo Black", "Arial Narrow", system-ui, sans-serif;
+  --font-body:
+    "Plus Jakarta Sans", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-utility: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --color-danger: var(--danger);
+
+  /* --- /v2 readable theme (QuickAds palette) ------------------------------ */
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink-1: var(--ink-1);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-4: var(--ink-4);
+  --color-lime: var(--lime);
+  --color-lime-tint: var(--lime-tint);
+  --color-lime-strong: var(--lime-strong);
+  --font-sans-readable:
+    "Plus Jakarta Sans", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 :root {
@@ -62,19 +87,94 @@
   --border: oklch(0.76 0.16 82 / 18%);
   --input: oklch(0.76 0.16 82 / 25%);
   --ring: oklch(0.86 0.13 86);
-  --ink: #0B0E14;
-  --ink-soft: #141926;
-  --gold: #E3B23C;
-  --gold-bright: #F7DC8A;
-  --gold-deep: #A97C1E;
-  --paper: #FFFFFF;
-  --muted-copy: #B9BFCC;
+  color-scheme: dark;
+  --page: #0b0e14;
+  --panel: #141926;
+  --heading: #ffffff;
+  --body: #b9bfcc;
+  --on-gold: #0b0e14;
+  --gold: #e3b23c;
+  --gold-bright: #f7dc8a;
+  --gold-deep: #a97c1e;
+  --gold-fill: #e3b23c;
+  --gold-fill-strong: #f7dc8a;
+  /* Foil stops are separate from --gold-bright so the gradient can be retuned
+     for light mode without dragging the readable text colour with it. */
+  --foil-a: #a97c1e;
+  --foil-b: #f7dc8a;
+  --foil-c: #e3b23c;
+  --shadow-tint: rgb(0 0 0 / 55%);
+  --danger: #ff9b8a;
+
+  /* /v2 readable theme (QuickAds palette). Contrast on --canvas:
+     ink-1 17.4:1, ink-2 10.5:1, ink-3 4.8:1. --ink-4 is placeholders and
+     disabled text only; the limes are fills and borders only, never text. */
+  --canvas: #f7f3ef;
+  --surface: #fbf7f2;
+  --surface-2: #fefcf9;
+  --line: #e1dad0;
+  --line-strong: #b8ac9a;
+  --ink-1: #0f0f0c;
+  --ink-2: #3a362e;
+  --ink-3: #6b6459;
+  --ink-4: #a8a296;
+  --lime: #c6f25c;
+  --lime-tint: #e9f99c;
+  --lime-strong: #9fcc2b;
 }
 
-.dark { color-scheme: dark; }
+/* --- / light mode. Dark stays the default; this applies only when the visitor
+   opts in, which the inline script in __root.tsx stamps before first paint.
+   Contrast on --page: heading 17.6:1, body 7.8:1, gold 5.1:1,
+   gold-bright 6.1:1, --on-gold over --gold-fill 9.6:1. The --foil-* stops are
+   used only on large display headings, where the 3:1 large-text bar applies. */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --background: #fcfaf6;
+  --foreground: #12151c;
+  --card: #f4efe4;
+  --card-foreground: #12151c;
+  --popover: #fffdf8;
+  --popover-foreground: #12151c;
+  --primary: #8a6314;
+  --primary-foreground: #fffdf8;
+  --secondary: #f4efe4;
+  --secondary-foreground: #12151c;
+  --muted: #f4efe4;
+  --muted-foreground: #4a5060;
+  --accent: #f0e8d6;
+  --accent-foreground: #12151c;
+  --border: rgb(138 99 20 / 22%);
+  --input: rgb(138 99 20 / 30%);
+  --ring: #8a6314;
+
+  --page: #fcfaf6;
+  --panel: #f4efe4;
+  --heading: #12151c;
+  --body: #4a5060;
+  --on-gold: #0b0e14;
+  --gold: #8a6314;
+  --gold-bright: #7d5810;
+  --gold-deep: #5e410b;
+  --gold-fill: #e3b23c;
+  --gold-fill-strong: #d4a32f;
+  --foil-a: #6b4a0d;
+  --foil-b: #a87a19;
+  --foil-c: #7d5810;
+  --shadow-tint: rgb(70 54 16 / 18%);
+  --danger: #b4342a;
+}
+
+/* The map embed only needs inverting on the dark theme. */
+:root[data-theme="light"] .map-dark {
+  filter: none;
+}
 
 @layer base {
-  * { border-color: var(--color-border); }
+  * {
+    border-color: var(--color-border);
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -83,18 +183,38 @@
   }
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
+
+/* Tailwind's shadow utilities route the colour through a registered
+   --tw-shadow property, which does not re-resolve when --shadow-tint changes
+   between themes. Declaring box-shadow directly keeps elevation in step. */
+@utility elevate-lg {
+  box-shadow: 0 25px 50px -12px var(--shadow-tint);
+}
+
+@utility elevate-md {
+  box-shadow: 0 20px 25px -5px var(--shadow-tint);
+}
 
 @utility gold-foil {
-  background: linear-gradient(100deg, var(--gold-deep) 0%, var(--gold-bright) 50%, var(--gold) 100%);
+  background: linear-gradient(100deg, var(--foil-a) 0%, var(--foil-b) 50%, var(--foil-c) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
 }
 
 @utility gold-border-glow {
-  transition: box-shadow 250ms ease, border-color 250ms ease, transform 250ms ease;
-  &:hover { box-shadow: inset 0 0 20px oklch(0.76 0.16 82 / 6%); border-color: oklch(0.76 0.16 82 / 38%); transform: translateY(-2px); }
+  transition:
+    box-shadow 250ms ease,
+    border-color 250ms ease,
+    transform 250ms ease;
+  &:hover {
+    box-shadow: inset 0 0 20px color-mix(in srgb, var(--gold) 8%, transparent);
+    border-color: color-mix(in srgb, var(--gold) 42%, transparent);
+    transform: translateY(-2px);
+  }
 }
 
 @utility fade-rise {
@@ -102,11 +222,120 @@ html { scroll-behavior: smooth; }
 }
 
 @keyframes fade-rise {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade-and-rise on scroll: 16px, 500ms, ease-out. */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 500ms ease-out,
+    transform 500ms ease-out;
+}
+
+@utility reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Gentle ring behind the floating WhatsApp button. */
+@utility pulse-ring {
+  animation: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.45);
+  }
+}
+
+/* One consistent gold focus ring for every interactive element. */
+@utility focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+    border-radius: inherit;
+  }
+}
+
+/* Horizontal rails scroll, but the scrollbar itself would break the dark look. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* The plain Maps embed has no dark theme (that needs a keyed JS API), so this
+   inverts it to sit on --ink instead of glowing white in the middle of the page. */
+@utility map-dark {
+  filter: invert(0.92) hue-rotate(180deg) brightness(0.95) contrast(0.9) saturate(0.6);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Reveals must still end up visible — never leave content at opacity 0. */
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- /v2 readable theme --------------------------------------------------- */
+
+/* The dark body colour would otherwise show through when /v2 is overscrolled. */
+body:has(.theme-paper) {
+  background-color: var(--canvas);
+  color: var(--ink-2);
+}
+
+/* Lime is too light to read as text on cream (1.7:1), so the accent appears
+   behind the word as a highlighter stroke instead of colouring it. */
+@utility marker-lime {
+  position: relative;
+  display: inline;
+  background-image: linear-gradient(
+    to top,
+    var(--lime-tint) 0%,
+    var(--lime-tint) 38%,
+    transparent 38%
+  );
+  padding-inline: 0.06em;
+}
+
+/* Ink rather than lime: the accent only reaches 1.7:1 on cream, nowhere near
+   the 3:1 a focus indicator needs. */
+@utility focus-ring-ink {
+  &:focus-visible {
+    outline: 2px solid var(--ink-1);
+    outline-offset: 2px;
+    border-radius: inherit;
+  }
 }
