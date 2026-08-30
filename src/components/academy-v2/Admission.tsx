@@ -10,15 +10,18 @@ export function Admission() {
       <div className="mx-auto max-w-[1200px]">
         <SectionHeading
           eyebrow="Getting started"
-          title="Three steps"
+          title="Two steps"
           highlight="to join"
           align="center"
         />
 
-        <ol className="relative mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-3">
+        <ol className="relative mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
           <span
             aria-hidden="true"
-            className="absolute left-[16.67%] right-[16.67%] top-5 hidden h-px bg-line md:block"
+            /* Inset to the centre of the first and last disc, derived from the
+               step count so it cannot go stale if a step is added or removed. */
+            style={{ inset: `1.25rem ${100 / (admissionSteps.length * 2)}% auto` }}
+            className="absolute top-5 hidden h-px bg-line md:block"
           />
           {admissionSteps.map((step, index) => (
             <Reveal

@@ -19,15 +19,18 @@ export const academy = {
   name: "Harshika Academy",
   tagline: "Building Knowledge. Shaping Futures.",
   strapline: "Quality Education · Strong Foundation · Bright Future",
-  city: "Jabalpur",
+  city: "Bhairunda",
   phone: phoneDisplay,
   phoneE164,
   phoneHref,
   email: "academy@harshikaacademy.in",
-  addressLine: "123, Academic Square, Main Market Road",
-  locality: "Jabalpur",
+  addressLine: "Neelkanth Road, Ward No. 10",
+  /** Locals navigate by the college, not the road name. */
+  landmark: "Near SVN Govt. College",
+  locality: "Bhairunda",
+  district: "Sehore",
   region: "Madhya Pradesh",
-  postalCode: "482001",
+  postalCode: "466331",
   country: "IN",
   timings: "Monday – Saturday · 8:00 AM – 7:00 PM",
   openingHours: "Mo-Sa 08:00-19:00",
@@ -39,11 +42,17 @@ export const academy = {
 };
 
 /** Full postal address on one line — used in the footer, contact row and schema. */
-export const fullAddress = `${academy.addressLine}, ${academy.locality}, ${academy.region} ${academy.postalCode}`;
+export const fullAddress = `${academy.addressLine}, ${academy.landmark}, ${academy.locality}, Dist. ${academy.district}, ${academy.region} ${academy.postalCode}`;
 
-/** Google Maps embed, centred on the address above. */
-export const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(fullAddress)}&output=embed`;
-export const mapDirectionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`;
+/**
+ * Surveyed coordinates, not a geocode of the address string. Bhairunda has few
+ * mapped street names, so searching the address drops the pin in the wrong part
+ * of town; the lat/long puts it on the building.
+ */
+export const geo = { latitude: 22.68059, longitude: 77.27266 };
+
+export const mapEmbedUrl = `https://www.google.com/maps?q=${geo.latitude},${geo.longitude}&z=16&output=embed`;
+export const mapDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${geo.latitude},${geo.longitude}`;
 
 // -- Navigation ---------------------------------------------------------------
 
@@ -286,7 +295,6 @@ export type Step = { title: string; text: string };
 
 export const admissionSteps: Step[] = [
   { title: "Message or call us", text: "Tell us your class and subjects." },
-  { title: "Attend a free demo class", text: "Sit in a real batch, no commitment." },
   { title: "Confirm your seat", text: "We share the timetable and you begin." },
 ];
 
@@ -494,11 +502,6 @@ export const faqs: Faq[] = [
       "We keep batches small so students can ask questions and get individual attention. The exact number depends on the class and subject.",
   },
   {
-    question: "Can my child attend a demo class?",
-    answer:
-      "Yes. Message or call us with the student's class and subjects. We will suggest a suitable live batch for a free demo.",
-  },
-  {
     question: "What are the class timings?",
     answer:
       "Classes run Monday to Saturday between 8:00 AM and 7:00 PM. We share the current batch options when you contact us.",
@@ -528,5 +531,5 @@ export const classOptions = courseTabs.map((tab) => tab.label);
 
 export const seo = {
   title: `Harshika Academy — Coaching Classes in ${academy.city} | Mohit Sarathe`,
-  description: `Concept-first coaching for Classes 6 to 12 in ${academy.city}, by CTET-qualified teacher Mohit Sarathe. Small batches, weekly tests and honest feedback to parents. Book a free demo class.`,
+  description: `Concept-first coaching for Classes 6 to 12 in ${academy.city}, by CTET-qualified teacher Mohit Sarathe. Small batches, weekly tests and honest feedback to parents. Call or message to ask about admission.`,
 };

@@ -47,7 +47,7 @@ export function Hero() {
           <Reveal delay={440}>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a href="#contact" className={cn(ctaClass, "h-12")}>
-                Book a free demo class
+                Enquire about admission
               </a>
               <a href={academy.phoneHref} className={cn(ghostClass, "h-12")}>
                 <Phone className="size-4 text-ink-3" aria-hidden="true" />

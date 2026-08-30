@@ -57,7 +57,7 @@ export function Hero() {
                 asChild
                 className="focus-ring h-12 rounded-full bg-gold-fill px-6 font-utility text-xs font-bold uppercase tracking-wider text-on-gold transition-colors hover:bg-gold-fill-strong"
               >
-                <a href="#contact">Book a Free Demo Class</a>
+                <a href="#contact">Enquire About Admission</a>
               </Button>
               <Button
                 asChild
