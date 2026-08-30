@@ -42,7 +42,7 @@ Each phase is independently reviewable and leaves the app working.
 
 | Phase | Contents |
 | --- | --- |
-| 1 | Types, `src/data/crm/*` dummy data, `store.ts`, `.theme-admin` tokens |
+| 1 | Types, pure logic + tests, `src/data/crm/*` dummy data, `store.ts`, `.theme-app` |
 | 2 | Admin shell and nav, students list and profile, batches |
 | 3 | Fees — plan, payment log, pending list, WhatsApp reminder |
 | 4 | Attendance marking; tests and marks entry |
@@ -66,11 +66,11 @@ src/routes/
 
 ### The data seam
 
-Every screen reads and writes through `src/lib/store.ts`. No screen imports a
+Every screen reads and writes through `src/lib/crm/store.ts`. No screen imports a
 data file directly.
 
 ```
-screens  →  src/lib/store.ts  →  src/data/crm/*.ts   (v1: typed objects)
+screens  →  src/lib/crm/store.ts  →  src/data/crm/*.ts   (v1: typed objects)
                               →  Supabase client      (v2: same interface)
 ```
 
@@ -78,6 +78,15 @@ v1 ships with dummy data as typed exported objects, matching the existing
 `src/data/content.ts` pattern. When Supabase goes in, `store.ts` is the only
 file that changes; no screen is edited. This is the whole reason the seam
 exists, so nothing may bypass it.
+
+**Every store function is `async` from day one**, even though the dummy
+implementation could return synchronously. Supabase is async; if v1 screens
+consume synchronous values, the migration rewrites every component and the seam
+was pointless. Screens call the store through TanStack Query, which is already
+a dependency.
+
+Writes mutate a module-level array and do not survive a page reload. That is
+expected in v1 and disappears with Postgres.
 
 Dummy data volume: ~15 students, 3 batches, 4 weeks of attendance, 3 tests, a
 handful of payments and notices. Enough that every screen looks real, small
@@ -216,13 +225,25 @@ A student's own record is never hidden from them.
 feeStatus(student) → "paid" | "due" | "overdue"
 ```
 
-Defined against the current cycle, where a cycle's due date is its start date
-plus the cycle length:
+Fees are paid in advance, so a cycle's due date **is** its start date. Cycles
+repeat from `FeePlan.startDate` every 1 month (`monthly`) or 3 (`quarterly`).
 
-- `paid` — payments covering this cycle total at least `amount - concession`
-- `due` — shortfall exists, and today is no more than 7 days past the due date
-  (this includes every day before the due date)
-- `overdue` — shortfall exists, and today is more than 7 days past the due date
+- `paid` — payments falling inside this cycle total at least
+  `amount - concession`
+- `due` — shortfall exists, and today is within 7 days of the cycle start
+- `overdue` — shortfall exists, and today is more than 7 days past the cycle
+  start
+
+An earlier draft put the due date at *cycle start plus cycle length*, i.e.
+payment in arrears. That is unreachable: by the time you pass such a due date
+you are already inside the next cycle, so the shortfall is recomputed against
+the new cycle and `overdue` can never be returned. Advance billing also matches
+how the academy actually collects — fees arrive in the first week of the month.
+
+Payments are attributed to the cycle whose date range contains them. A parent
+paying next month's fees a few days early is therefore counted against the
+current cycle. This is a known limitation, acceptable while the data is
+fabricated, and worth revisiting if it shows up in practice.
 
 The 7-day grace between `due` and `overdue` exists so a parent paying a few days
 late never trips the material lock. Part payments count toward the total rather
@@ -242,18 +263,48 @@ the leverage.
 
 ## Theming
 
-The app already scopes themes by class. This adds a third set, following the
-existing pattern.
+Both new surfaces use the existing `/` light palette — the warm cream and ink
+with gold accents already defined in `src/styles.css`. No new palette.
 
-| Surface | Theme | Character |
-| --- | --- | --- |
-| `/` | gold and ink, light default with dark toggle | existing, untouched |
-| `/v2` | `.theme-paper` cream | existing, untouched |
-| `/admin` | `.theme-admin` — neutral grey and white | dense rows, tight spacing, built for speed |
-| `/portal` | gold and ink, light | warm, spacious, large tap targets |
+| Surface | Theme |
+| --- | --- |
+| `/` | gold and ink, light default with dark toggle — existing, untouched |
+| `/v2` | `.theme-paper` cream — existing, untouched |
+| `/admin` | `/` light palette, locked light |
+| `/portal` | `/` light palette, locked light |
 
-Admin is deliberately plain. Gold-on-dark fights against data tables and fast
-entry; the portal is where the brand belongs.
+### Locking it light
+
+The `/` light palette is keyed on `:root:not([data-theme="dark"])`. A visitor
+who toggled dark mode on the marketing site has `data-theme="dark"` stamped on
+`<html>` by the pre-paint script, which would drag the admin and portal dark
+along with it.
+
+Fix: extend that selector to a list rather than duplicating the values.
+
+```css
+:root:not([data-theme="dark"]),
+.theme-app {
+  /* unchanged block */
+}
+```
+
+`.theme-app` wraps both new surfaces. Custom properties inherit from the nearest
+ancestor that declares them, so the wrapper's values win inside its subtree
+regardless of what `:root` says — the same mechanism `.theme-paper` already uses
+for `/v2`. The block must be extended, not copied, so the two never drift.
+
+This matters beyond the brand colours: the block also declares the shadcn tokens
+(`--background`, `--card`, `--primary`, `--border`, `--ring`), and admin leans
+heavily on shadcn tables, dialogs and selects. Miss those and the components go
+dark inside a light page.
+
+`body:has(.theme-app)` sets the page background, following the `.theme-paper`
+precedent.
+
+Admin and portal are differentiated by **density and layout**, not colour:
+admin runs tight rows and compact controls, the portal runs generous spacing and
+large tap targets.
 
 ## Language
 
