@@ -1,8 +1,7 @@
-import teacherImage from "@/assets/mohit-sarathe.jpg";
 import { Check, Phone } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { academy, faculty, hero } from "@/data/content";
+import { academy, faculty, hero, heroPortrait } from "@/data/content";
 import { ctaClass, eyebrowClass, ghostClass, Marker, Reveal } from "./shared";
 
 export function Hero() {
@@ -61,10 +60,10 @@ export function Hero() {
         <Reveal delay={200} className="relative mx-auto w-full max-w-[460px]">
           <div className="overflow-hidden rounded-xl border border-line bg-surface-2">
             <img
-              src={teacherImage}
-              alt={lead?.alt ?? "Mohit Sarathe beside a classroom blackboard"}
-              width={1024}
-              height={1280}
+              src={heroPortrait.src}
+              alt={heroPortrait.alt}
+              width={1040}
+              height={1300}
               fetchPriority="high"
               className="aspect-[4/5] w-full object-cover"
             />

@@ -109,16 +109,16 @@ export function Results() {
               key={`${item.name}-${item.className}`}
               className={`${cardClass} w-[260px] shrink-0 snap-start overflow-hidden sm:w-[300px]`}
             >
-              <img
-                src={item.image}
-                alt={`${item.name}, ${item.className}`}
-                loading="lazy"
-                decoding="async"
-                draggable={false}
-                width={720}
-                height={540}
-                className="aspect-[4/3] w-full object-cover"
-              />
+              {/* Initials, not a photograph: we do not hold consent to publish
+                  these students' faces. Swap in a portrait once we do. */}
+              <div
+                aria-hidden="true"
+                className="flex aspect-[4/3] w-full items-center justify-center border-b border-ink-4/15 bg-lime/10"
+              >
+                <span className="text-4xl font-bold tracking-tight text-ink-2/70">
+                  {item.initials}
+                </span>
+              </div>
               <div className="p-4">
                 <p className="text-xs font-semibold uppercase tracking-wider text-ink-3">
                   {item.className}

@@ -122,12 +122,12 @@ export const pillars: Pillar[] = [
 
 export const aboutImages = {
   classroom: {
-    src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1100&q=80",
-    alt: "Students seated at desks during a lesson at Harshika Academy",
+    src: "/assets/classroom-wide.webp",
+    alt: "A morning batch at Harshika Academy, students seated at low desks with the whiteboard behind them",
   },
   student: {
-    src: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80",
-    alt: "A student writing notes in a workbook during class",
+    src: "/assets/classroom-desks.webp",
+    alt: "Students working through written practice at their desks beside the classroom window",
   },
 };
 
@@ -262,14 +262,23 @@ export const faculty: Teacher[] = [
   {
     name: "Mohit Sarathe",
     role: "Faculty Head",
-    image: "", // filled in by the component from the bundled asset
-    alt: "Mohit Sarathe, CTET-qualified teacher at Harshika Academy, beside a classroom blackboard",
+    image: "/assets/mohit-teaching.webp",
+    alt: "Mohit Sarathe holding a piece of chalk in front of the classroom blackboard at Harshika Academy",
     qualifications: ["B.A.", "M.A.", "PGDCA", "D.El.Ed."],
     badge: "CTET Qualified",
     note: "I teach the way I wish I had been taught. One idea at a time, with an example from something the student already knows — a cricket score, a shop bill, a bus timing. If a child cannot explain it back to me in their own words, we have not finished the topic. I would rather cover less and have it stay.",
     quote: "A student who understands the 'why' never forgets the 'what'.",
   },
 ];
+
+/**
+ * The hero uses a composed portrait on the dark arc plate; the faculty card
+ * further down uses the classroom shot. Two different images on purpose.
+ */
+export const heroPortrait = {
+  src: "/assets/mohit-hero.webp",
+  alt: "Mohit Sarathe, CTET-qualified faculty head at Harshika Academy",
+};
 
 // -- Admission ----------------------------------------------------------------
 
@@ -288,69 +297,57 @@ export type ResultCard = {
   className: string;
   result: string;
   school: string;
-  image: string;
+  initials: string;
 };
 
 export const results: ResultCard[] = [
   {
     name: "Aarav Sharma",
+    initials: "AS",
     className: "Class 10 · CBSE",
     result: "92% in Mathematics",
     school: "St. Joseph's School",
-    image:
-      "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=720&q=80",
   },
   {
     name: "Ananya Patel",
+    initials: "AP",
     className: "Class 12 · Science",
     result: "91% overall",
     school: "Delhi Public School",
-    image:
-      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=720&q=80",
   },
   {
     name: "Rohan Verma",
+    initials: "RV",
     className: "Class 8",
     result: "From 58% to 81%",
     school: "Kendriya Vidyalaya",
-    image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=720&q=80",
   },
   {
     name: "Meera Joshi",
+    initials: "MJ",
     className: "Class 10 · ICSE",
     result: "94% in Science",
     school: "Christ Church School",
-    image:
-      "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=720&q=80",
   },
   {
     name: "Kabir Khan",
+    initials: "KK",
     className: "Class 9",
     result: "Best improvement award",
     school: "St. Aloysius School",
-    image:
-      "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=720&q=80",
   },
   {
     name: "Ishita Singh",
+    initials: "IS",
     className: "Class 12 · Commerce",
     result: "89% in Accountancy",
     school: "M.G.M. School",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=720&q=80",
   },
 ];
 
 // -- Gallery ------------------------------------------------------------------
 
-export const galleryCategories = [
-  "All",
-  "Classroom",
-  "Events",
-  "Achievements",
-  "Facilities",
-] as const;
+export const galleryCategories = ["All", "Classroom", "Events", "Achievements"] as const;
 
 export type GalleryCategory = (typeof galleryCategories)[number];
 
@@ -366,75 +363,75 @@ export type GalleryItem = {
 
 export const galleryItems: GalleryItem[] = [
   {
-    src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=80",
-    caption: "A focused afternoon batch",
+    src: "/assets/classroom-wide.webp",
+    caption: "A morning batch in session",
     category: "Classroom",
     ratio: "wide",
   },
   {
-    src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80",
-    caption: "Learning together",
-    category: "Classroom",
-    ratio: "tall",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=80",
-    caption: "Celebrating a result",
-    category: "Achievements",
-    ratio: "square",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1000&q=80",
-    caption: "A lesson in progress",
-    category: "Classroom",
-    ratio: "square",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1000&q=80",
-    caption: "The reading corner",
-    category: "Facilities",
-    ratio: "tall",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1000&q=80",
-    caption: "A day worth remembering",
-    category: "Events",
-    ratio: "wide",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=1000&q=80",
-    caption: "Peer learning hour",
-    category: "Classroom",
-    ratio: "square",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1000&q=80",
-    caption: "Test day concentration",
+    src: "/assets/trophy-winners-banner.webp",
+    caption: "Prize day under the academy banner",
     category: "Achievements",
     ratio: "tall",
   },
   {
-    src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1000&q=80",
-    caption: "A bright classroom",
-    category: "Facilities",
+    src: "/assets/report-cards.webp",
+    caption: "Report cards, handed out together",
+    category: "Achievements",
     ratio: "wide",
   },
   {
-    src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1000&q=80",
-    caption: "Questions are welcome",
+    src: "/assets/medalist-felicitation.webp",
+    caption: "Felicitating a state-level medallist",
+    category: "Achievements",
+    ratio: "square",
+  },
+  {
+    src: "/assets/classroom-desks.webp",
+    caption: "Written practice by the window",
     category: "Classroom",
     ratio: "square",
   },
   {
-    src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1000&q=80",
-    caption: "The next step",
+    src: "/assets/prize-family.webp",
+    caption: "Prize day at the academy",
     category: "Events",
     ratio: "tall",
   },
   {
-    src: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=80",
-    caption: "Small group practice",
-    category: "Facilities",
+    src: "/assets/students-peace.webp",
+    caption: "After class, on the way home",
+    category: "Classroom",
+    ratio: "wide",
+  },
+  {
+    src: "/assets/trophy-winners.webp",
+    caption: "Trophies and a cake to go with them",
+    category: "Achievements",
+    ratio: "square",
+  },
+  {
+    src: "/assets/guest-felicitation.webp",
+    caption: "Welcoming a guest to the academy",
+    category: "Events",
+    ratio: "square",
+  },
+  {
+    src: "/assets/new-year-group.webp",
+    caption: "Ringing in the new year together",
+    category: "Events",
+    ratio: "wide",
+  },
+  {
+    src: "/assets/classroom-desks-wide.webp",
+    caption: "A quiet afternoon of practice",
+    category: "Classroom",
+    ratio: "wide",
+  },
+  {
+    src: "/assets/senior-batch.webp",
+    caption: "The senior batch outside the academy",
+    category: "Events",
     ratio: "wide",
   },
 ];

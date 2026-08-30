@@ -1,13 +1,7 @@
-import teacherImage from "@/assets/mohit-sarathe.jpg";
 import { GraduationCap } from "lucide-react";
 
 import { faculty, type Teacher } from "@/data/content";
 import { GoldArc, Reveal, SectionHeading } from "./shared";
-
-/** Bundled portraits, keyed by teacher name. Drop new files in as staff join. */
-const portraits: Record<string, string> = {
-  "Mohit Sarathe": teacherImage,
-};
 
 export function Faculty() {
   return (
@@ -26,7 +20,6 @@ export function Faculty() {
 
 function TeacherCard({ teacher, showHeading }: { teacher: Teacher; showHeading: boolean }) {
   const [firstName, ...rest] = teacher.name.split(" ");
-  const image = teacher.image || portraits[teacher.name] || teacherImage;
 
   return (
     <div className="grid items-center gap-16 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
@@ -35,12 +28,12 @@ function TeacherCard({ teacher, showHeading }: { teacher: Teacher; showHeading: 
         <GoldArc className="absolute -inset-x-8 -top-6 h-40 w-[calc(100%+4rem)] rotate-180" />
         <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem] border border-gold/20 bg-panel">
           <img
-            src={image}
+            src={teacher.image}
             alt={teacher.alt}
             loading="lazy"
             decoding="async"
-            width={1024}
-            height={1280}
+            width={1040}
+            height={1563}
             className="h-full w-full object-cover"
           />
         </div>

@@ -1,12 +1,7 @@
-import teacherImage from "@/assets/mohit-sarathe.jpg";
 import { GraduationCap } from "lucide-react";
 
 import { faculty, type Teacher } from "@/data/content";
 import { Reveal, SectionHeading } from "./shared";
-
-const portraits: Record<string, string> = {
-  "Mohit Sarathe": teacherImage,
-};
 
 export function Faculty() {
   return (
@@ -22,19 +17,18 @@ export function Faculty() {
 
 function TeacherCard({ teacher, showHeading }: { teacher: Teacher; showHeading: boolean }) {
   const [firstName, ...rest] = teacher.name.split(" ");
-  const image = teacher.image || portraits[teacher.name] || teacherImage;
 
   return (
     <div className="grid items-start gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
       <Reveal className="mx-auto w-full max-w-[380px]">
         <div className="overflow-hidden rounded-xl border border-line bg-surface-2">
           <img
-            src={image}
+            src={teacher.image}
             alt={teacher.alt}
             loading="lazy"
             decoding="async"
-            width={1024}
-            height={1280}
+            width={1040}
+            height={1563}
             className="aspect-[3/4] w-full object-cover"
           />
         </div>
