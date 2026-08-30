@@ -123,12 +123,13 @@
   --lime-strong: #9fcc2b;
 }
 
-/* --- / light mode. Dark stays the default; this applies only when the visitor
-   opts in, which the inline script in __root.tsx stamps before first paint.
+/* --- / light mode — the default. Keyed on :not([data-theme="dark"]) so a
+   missing attribute still lands on light. Dark is opt-in via the header switch,
+   which the inline script in __root.tsx stamps before first paint.
    Contrast on --page: heading 17.6:1, body 7.8:1, gold 5.1:1,
    gold-bright 6.1:1, --on-gold over --gold-fill 9.6:1. The --foil-* stops are
    used only on large display headings, where the 3:1 large-text bar applies. */
-:root[data-theme="light"] {
+:root:not([data-theme="dark"]) {
   color-scheme: light;
 
   --background: #fcfaf6;
@@ -167,7 +168,7 @@
 }
 
 /* The map embed only needs inverting on the dark theme. */
-:root[data-theme="light"] .map-dark {
+:root:not([data-theme="dark"]) .map-dark {
   filter: none;
 }
 

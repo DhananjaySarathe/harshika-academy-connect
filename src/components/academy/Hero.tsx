@@ -1,8 +1,7 @@
-import teacherImage from "@/assets/mohit-sarathe.jpg";
 import { Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { academy, faculty, hero, whatsappUrl } from "@/data/content";
+import { academy, faculty, hero, heroPortrait, whatsappUrl } from "@/data/content";
 import { GoldArc, Reveal } from "./shared";
 
 export function Hero() {
@@ -58,7 +57,7 @@ export function Hero() {
                 asChild
                 className="focus-ring h-12 rounded-full bg-gold-fill px-6 font-utility text-xs font-bold uppercase tracking-wider text-on-gold transition-colors hover:bg-gold-fill-strong"
               >
-                <a href="#contact">Book a Free Demo Class</a>
+                <a href="#contact">Enquire About Admission</a>
               </Button>
               <Button
                 asChild
@@ -78,10 +77,10 @@ export function Hero() {
           <div aria-hidden="true" className="absolute -inset-10 rounded-full bg-gold/5 blur-3xl" />
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-gold/20 bg-panel">
             <img
-              src={teacherImage}
-              alt={lead?.alt ?? "Mohit Sarathe beside a classroom blackboard"}
-              width={1024}
-              height={1280}
+              src={heroPortrait.src}
+              alt={heroPortrait.alt}
+              width={1040}
+              height={1300}
               fetchPriority="high"
               className="h-full w-full object-cover"
             />

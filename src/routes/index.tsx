@@ -16,7 +16,7 @@ import { Results } from "@/components/academy/Results";
 import { ScrollProgress } from "@/components/academy/ScrollProgress";
 import { Testimonials } from "@/components/academy/Testimonials";
 import { TrustStrip } from "@/components/academy/TrustStrip";
-import { academy, faqs, seo } from "@/data/content";
+import { academy, faqs, geo, mapDirectionsUrl, seo } from "@/data/content";
 
 /**
  * LocalBusiness + EducationalOrganization, plus the FAQ block so the questions
@@ -36,12 +36,18 @@ const jsonLd = {
       email: academy.email,
       address: {
         "@type": "PostalAddress",
-        streetAddress: academy.addressLine,
+        streetAddress: `${academy.addressLine}, ${academy.landmark}`,
         addressLocality: academy.locality,
         addressRegion: academy.region,
         postalCode: academy.postalCode,
         addressCountry: academy.country,
       },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: geo.latitude,
+        longitude: geo.longitude,
+      },
+      hasMap: mapDirectionsUrl,
       areaServed: academy.city,
       openingHours: academy.openingHours,
       sameAs: academy.social.map((item) => item.href),
@@ -69,18 +75,29 @@ export const Route = createFileRoute("/")({
       { name: "description", content: seo.description },
       {
         name: "keywords",
-        content: `coaching classes ${academy.city}, tuition ${academy.city}, CBSE coaching, Class 10 tuition, Class 12 tuition, ${academy.name}`,
+        content: `coaching classes ${academy.city}, tuition ${academy.city}, coaching classes Nasrullaganj, tuition ${academy.district}, CBSE coaching, MP Board coaching, Navodaya coaching, Class 10 tuition, Class 12 tuition, ${academy.name}`,
       },
       { property: "og:title", content: seo.title },
       { property: "og:description", content: seo.description },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "en_IN" },
       { property: "og:site_name", content: academy.name },
+      { property: "og:image", content: "/assets/og-cover.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      {
+        property: "og:image:alt",
+        content: `${academy.name} — Mohit Sarathe, CTET-qualified faculty head`,
+      },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: seo.title },
       { name: "twitter:description", content: seo.description },
+      { name: "twitter:image", content: "/assets/og-cover.jpg" },
       { name: "geo.placename", content: `${academy.locality}, ${academy.region}` },
-      { name: "theme-color", content: "#0B0E14" },
+      { name: "geo.position", content: `${geo.latitude};${geo.longitude}` },
+      { name: "geo.region", content: "IN-MP" },
+      { name: "ICBM", content: `${geo.latitude}, ${geo.longitude}` },
+      { name: "theme-color", content: "#FCFAF6" },
     ],
     scripts: [
       {

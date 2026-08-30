@@ -13,7 +13,7 @@ export function FinalCta() {
         </Reveal>
         <Reveal delay={100}>
           <p className="mt-3 text-[15px] leading-[1.65] text-ink-2">
-            Book a free demo class and see how we teach before you decide.
+            Tell us the student's class and subjects, and we will suggest a batch that fits.
           </p>
         </Reveal>
         <Reveal delay={180}>

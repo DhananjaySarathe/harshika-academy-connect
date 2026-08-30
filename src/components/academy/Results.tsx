@@ -111,16 +111,16 @@ export function Results() {
               key={`${item.name}-${item.className}`}
               className="w-[270px] shrink-0 snap-start overflow-hidden rounded-2xl border border-gold/[0.18] bg-panel sm:w-[320px]"
             >
-              <img
-                src={item.image}
-                alt={`${item.name}, ${item.className}`}
-                loading="lazy"
-                decoding="async"
-                draggable={false}
-                width={720}
-                height={540}
-                className="aspect-[4/3] w-full object-cover"
-              />
+              {/* Initials, not a photograph: we do not hold consent to publish
+                  these students' faces. Swap in a portrait once we do. */}
+              <div
+                aria-hidden="true"
+                className="flex aspect-[4/3] w-full items-center justify-center border-b border-gold/[0.18] bg-gold/[0.06]"
+              >
+                <span className="font-display text-5xl uppercase tracking-[0.1em] text-gold/70">
+                  {item.initials}
+                </span>
+              </div>
               <div className="p-5">
                 <p className="font-utility text-[10px] uppercase tracking-wider text-gold">
                   {item.className}

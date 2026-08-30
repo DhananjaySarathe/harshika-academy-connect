@@ -49,10 +49,10 @@ layout.
 
 Both routes render the same sections from the same data.
 
-| Route | Theme                                                                                                                                           |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/`   | Gold on near-black. Anton display caps, metallic gold-foil headings, a recurring gold arc. Ships a **dark/light switch** — dark is the default. |
-| `/v2` | The readable variant. Warm cream canvas, an ink type scale, sentence-case headings, lime reserved for primary buttons.                          |
+| Route | Theme                                                                                                                  |
+| ----- | ---------------------------------------------------------------------------------------------------------------------- |
+| `/`   | Warm off-white with gold accents by default, plus a **dark mode** (gold on near-black) behind the header switch.       |
+| `/v2` | The readable variant. Warm cream canvas, an ink type scale, sentence-case headings, lime reserved for primary buttons. |
 
 `/v2` is marked `noindex` so the two copies do not compete in search.
 
@@ -61,23 +61,24 @@ Section components are one file each, in `src/components/academy/` and
 
 ## Design system — `/`
 
-The tokens below flip between the two modes. The switch lives in the header (and
-in the mobile menu), the choice is remembered in `localStorage`, and an inline
+**Light is the default; dark is opt-in.** The switch lives in the header (and in
+the mobile menu), the choice is remembered in `localStorage`, and an inline
 script in `<head>` stamps it before first paint so there is no flash of the
-wrong theme on reload.
+wrong theme on reload. The light palette is keyed on
+`:root:not([data-theme="dark"])`, so a missing attribute still lands on light.
 
-| Token           | Dark      | Light          | Use                                |
-| --------------- | --------- | -------------- | ---------------------------------- |
-| `--page`        | `#0B0E14` | `#FCFAF6`      | Page background                    |
-| `--panel`       | `#141926` | `#F4EFE4`      | Alternating sections, cards        |
-| `--heading`     | `#FFFFFF` | `#12151C`      | Headlines                          |
-| `--body`        | `#B9BFCC` | `#4A5060`      | Body text                          |
-| `--gold`        | `#E3B23C` | `#8A6314`      | Accent **text**, borders, tints    |
-| `--gold-bright` | `#F7DC8A` | `#7D5810`      | Secondary accent text, hover       |
-| `--gold-deep`   | `#A97C1E` | `#5E410B`      | Deep accent                        |
-| `--gold-fill`   | `#E3B23C` | `#E3B23C`      | Solid button fill — bright in both |
-| `--on-gold`     | `#0B0E14` | `#0B0E14`      | Text on a gold fill — dark in both |
-| `--foil-a/b/c`  | gold ramp | dark-gold ramp | `gold-foil` gradient stops only    |
+| Token           | Light (default) | Dark      | Use                                |
+| --------------- | --------------- | --------- | ---------------------------------- |
+| `--page`        | `#FCFAF6`       | `#0B0E14` | Page background                    |
+| `--panel`       | `#F4EFE4`       | `#141926` | Alternating sections, cards        |
+| `--heading`     | `#12151C`       | `#FFFFFF` | Headlines                          |
+| `--body`        | `#4A5060`       | `#B9BFCC` | Body text                          |
+| `--gold`        | `#8A6314`       | `#E3B23C` | Accent **text**, borders, tints    |
+| `--gold-bright` | `#7D5810`       | `#F7DC8A` | Secondary accent text, hover       |
+| `--gold-deep`   | `#5E410B`       | `#A97C1E` | Deep accent                        |
+| `--gold-fill`   | `#E3B23C`       | `#E3B23C` | Solid button fill — bright in both |
+| `--on-gold`     | `#0B0E14`       | `#0B0E14` | Text on a gold fill — dark in both |
+| `--foil-a/b/c`  | dark-gold ramp  | gold ramp | `gold-foil` gradient stops only    |
 
 Three splits make the light mode work, and they are easy to undo by accident:
 

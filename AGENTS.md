@@ -14,10 +14,10 @@ academy edits that one file, not the JSX.
 
 Two routes render the same content from the same data file:
 
-| Route | Theme                                                            | File                   |
-| ----- | ---------------------------------------------------------------- | ---------------------- |
-| `/`   | Dark gold on near-black, with a dark/light switch (dark default) | `src/routes/index.tsx` |
-| `/v2` | Readable: warm cream canvas, ink type scale, lime CTAs           | `src/routes/v2.tsx`    |
+| Route | Theme                                                                                       | File                   |
+| ----- | ------------------------------------------------------------------------------------------- | ---------------------- |
+| `/`   | Warm off-white with gold accents; dark mode behind the header switch (light is the default) | `src/routes/index.tsx` |
+| `/v2` | Readable: warm cream canvas, ink type scale, lime CTAs                                      | `src/routes/v2.tsx`    |
 
 Sections live in `src/components/academy/` (dark) and
 `src/components/academy-v2/` (readable), one file per section. Editing content
@@ -27,7 +27,7 @@ updates both routes; editing a component affects only its theme.
 
 ## Theming `/`
 
-`/` supports dark (default) and light. Both read the same tokens, so **use the
+`/` supports light (default) and dark. Both read the same tokens, so **use the
 semantic utilities, not raw colours**: `bg-page`, `bg-panel`, `text-heading`,
 `text-body`, `text-gold`, `border-gold/NN`, `bg-gold-fill`, `text-on-gold`.
 
