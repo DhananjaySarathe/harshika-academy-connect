@@ -75,7 +75,7 @@ export const Route = createFileRoute("/")({
       { name: "description", content: seo.description },
       {
         name: "keywords",
-        content: `coaching classes ${academy.city}, tuition ${academy.city}, coaching classes Nasrullaganj, tuition ${academy.district}, CBSE coaching, MP Board coaching, Navodaya coaching, Class 10 tuition, Class 12 tuition, ${academy.name}`,
+        content: `coaching classes ${academy.city}, tuition ${academy.city}, coaching classes Nasrullaganj, tuition ${academy.district}, CBSE coaching, MP Board coaching, Navodaya coaching, Class 10 tuition, primary tuition, nursery classes, ${academy.name}`,
       },
       { property: "og:title", content: seo.title },
       { property: "og:description", content: seo.description },

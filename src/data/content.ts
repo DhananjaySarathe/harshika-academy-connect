@@ -71,8 +71,14 @@ export const navItems: NavItem[] = [
 // -- Hero ---------------------------------------------------------------------
 
 export const hero = {
-  eyebrow: "Building Knowledge. Shaping Futures.",
-  subline: "Concept-first coaching for Classes 6 to 12 by CTET-qualified faculty.",
+  eyebrow: "Nursery to Class 10 · CBSE & MP Board",
+  /**
+   * The header already carries the wordmark, so the h1 sells the teaching
+   * rather than repeating the brand name. Split so the second half can take
+   * the gold treatment.
+   */
+  headline: { lead: "Concepts that", accent: "actually click" },
+  subline: "Taught by Mohit Sarathe — CTET-qualified, in small batches.",
   bullets: [
     "Small batches, so every student gets attention",
     "Concepts explained until they actually click",
@@ -156,8 +162,32 @@ export type CourseTab = { id: string; label: string; subjects: Subject[] };
 
 export const courseTabs: CourseTab[] = [
   {
+    id: "nursery-class-5",
+    label: "Nursery – Class 5",
+    subjects: [
+      {
+        name: "Reading & Writing",
+        icon: "english",
+        description: "Letters, sounds and handwriting, at the child's own pace.",
+        timing: "Morning",
+      },
+      {
+        name: "Early Maths",
+        icon: "maths",
+        description: "Counting, tables, shapes and number sense before the tricks.",
+        timing: "Morning",
+      },
+      {
+        name: "EVS & General Awareness",
+        icon: "science",
+        description: "The world around them, explained in questions they already ask.",
+        timing: "Evening",
+      },
+    ],
+  },
+  {
     id: "class-6-8",
-    label: "Class 6–8",
+    label: "Class 6 – Class 8",
     subjects: [
       {
         name: "Mathematics",
@@ -177,11 +207,17 @@ export const courseTabs: CourseTab[] = [
         description: "Grammar, reading and writing with confidence.",
         timing: "Evening",
       },
+      {
+        name: "Social Science",
+        icon: "social",
+        description: "History, civics and geography tied to things they know.",
+        timing: "Morning",
+      },
     ],
   },
   {
     id: "class-9-10",
-    label: "Class 9–10",
+    label: "Class 9 – Class 10",
     subjects: [
       {
         name: "Mathematics",
@@ -201,52 +237,34 @@ export const courseTabs: CourseTab[] = [
         description: "History, civics, geography and economics made clear.",
         timing: "Evening",
       },
-    ],
-  },
-  {
-    id: "class-11-12",
-    label: "Class 11–12",
-    subjects: [
-      {
-        name: "Physics",
-        icon: "physics",
-        description: "Build intuition before formulas and numericals.",
-        timing: "Morning",
-      },
-      {
-        name: "Mathematics",
-        icon: "maths",
-        description: "Functions, calculus and exam-focused problem practice.",
-        timing: "Evening",
-      },
       {
         name: "English",
         icon: "english",
-        description: "Literature, writing formats and language skills.",
-        timing: "Evening",
+        description: "Comprehension, writing skills and board answer practice.",
+        timing: "Morning",
       },
     ],
   },
   {
-    id: "competitive",
-    label: "Competitive Exams",
+    id: "navodaya",
+    label: "Navodaya Prep",
     subjects: [
       {
-        name: "Aptitude",
-        icon: "aptitude",
-        description: "Speed, accuracy and the habits that make practice count.",
+        name: "Mental Ability",
+        icon: "reasoning",
+        description: "Patterns, figures and odd-one-out, practised until they are quick.",
         timing: "Morning",
       },
       {
-        name: "Reasoning",
-        icon: "reasoning",
-        description: "Patterns, logic and step-by-step thinking.",
+        name: "Arithmetic",
+        icon: "maths",
+        description: "The calculation speed the entrance paper actually demands.",
         timing: "Evening",
       },
       {
-        name: "General Studies",
-        icon: "social",
-        description: "A structured base for school and entrance preparation.",
+        name: "Language",
+        icon: "english",
+        description: "Passage reading and comprehension under exam timing.",
         timing: "Evening",
       },
     ],
@@ -319,7 +337,7 @@ export const results: ResultCard[] = [
   {
     name: "Ananya Patel",
     initials: "AP",
-    className: "Class 12 · Science",
+    className: "Class 9",
     result: "91% overall",
     school: "Delhi Public School",
   },
@@ -333,7 +351,7 @@ export const results: ResultCard[] = [
   {
     name: "Meera Joshi",
     initials: "MJ",
-    className: "Class 10 · ICSE",
+    className: "Class 10 · MP Board",
     result: "94% in Science",
     school: "Christ Church School",
   },
@@ -347,8 +365,8 @@ export const results: ResultCard[] = [
   {
     name: "Ishita Singh",
     initials: "IS",
-    className: "Class 12 · Commerce",
-    result: "89% in Accountancy",
+    className: "Class 7",
+    result: "89% in Mathematics",
     school: "M.G.M. School",
   },
 ];
@@ -479,7 +497,7 @@ export const testimonials: Testimonial[] = [
     quote:
       "The batch is small and the classes are calm. I started preparing before exams instead of waiting for the last month.",
     name: "Ananya Joshi",
-    relation: "Class 12 student",
+    relation: "Class 10 student",
     initials: "AJ",
   },
   {
@@ -531,5 +549,5 @@ export const classOptions = courseTabs.map((tab) => tab.label);
 
 export const seo = {
   title: `Harshika Academy — Coaching Classes in ${academy.city} | Mohit Sarathe`,
-  description: `Concept-first coaching for Classes 6 to 12 in ${academy.city}, by CTET-qualified teacher Mohit Sarathe. Small batches, weekly tests and honest feedback to parents. Call or message to ask about admission.`,
+  description: `Concept-first coaching from Nursery to Class 10 in ${academy.city}, by CTET-qualified teacher Mohit Sarathe. Small batches, weekly tests and honest feedback to parents. Call or message to ask about admission.`,
 };

@@ -1,7 +1,7 @@
 # Working in this repo
 
 Harshika Academy — a single-page marketing site for a coaching institute in
-Jabalpur. Its one job is to get a parent to tap WhatsApp or call.
+Bhairunda, Madhya Pradesh. Its one job is to get a parent to tap WhatsApp or call.
 
 ## Before you change anything
 
@@ -12,22 +12,18 @@ academy edits that one file, not the JSX.
 
 ## Routes
 
-Two routes render the same content from the same data file:
+One route renders the whole site:
 
 | Route | Theme                                                                                       | File                   |
 | ----- | ------------------------------------------------------------------------------------------- | ---------------------- |
 | `/`   | Warm off-white with gold accents; dark mode behind the header switch (light is the default) | `src/routes/index.tsx` |
-| `/v2` | Readable: warm cream canvas, ink type scale, lime CTAs                                      | `src/routes/v2.tsx`    |
 
-Sections live in `src/components/academy/` (dark) and
-`src/components/academy-v2/` (readable), one file per section. Editing content
-updates both routes; editing a component affects only its theme.
+Sections live in `src/components/academy/`, one file per section. All copy comes
+from `src/data/content.ts`.
 
-`/v2` is `noindex` — two indexable copies of the same content would compete.
+## Theming
 
-## Theming `/`
-
-`/` supports light (default) and dark. Both read the same tokens, so **use the
+The site supports light (default) and dark. Both read the same tokens, so **use the
 semantic utilities, not raw colours**: `bg-page`, `bg-panel`, `text-heading`,
 `text-body`, `text-gold`, `border-gold/NN`, `bg-gold-fill`, `text-on-gold`.
 
@@ -43,8 +39,6 @@ Three rules keep light mode readable:
 Tailwind's `shadow-*` colour utilities do not re-resolve when the theme var
 changes, so themed elevation uses the `elevate-lg` / `elevate-md` utilities in
 `src/styles.css` instead.
-
-`/v2` has its own independent palette and is unaffected by this switch.
 
 ## House rules
 
