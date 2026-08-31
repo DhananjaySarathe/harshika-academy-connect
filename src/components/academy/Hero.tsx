@@ -18,28 +18,30 @@ export function Hero() {
         className="absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(227,178,60,0.10),transparent_42%)]"
       />
 
-      <div className="mx-auto grid w-full max-w-[1200px] items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
-        <div className="relative z-10">
-          <Reveal>
+      <div className="mx-auto flex w-full max-w-[1200px] flex-col items-stretch lg:grid lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-20">
+        {/* display:contents on mobile lets these blocks be ordered around the
+            portrait, which is a grid sibling; on lg the wrapper is the left column. */}
+        <div className="contents lg:relative lg:z-10 lg:block">
+          <Reveal className="order-1">
             <p className="font-utility text-xs font-semibold uppercase tracking-[0.18em] text-gold">
               {hero.eyebrow}
             </p>
           </Reveal>
 
-          <Reveal delay={80}>
-            <h1 className="mt-5 flex flex-col font-display text-[clamp(3rem,11vw,6rem)] uppercase leading-[0.84] tracking-tight text-heading">
-              <span className="gold-foil">Harshika</span>
-              <span>Academy</span>
+          <Reveal delay={80} className="order-2">
+            <h1 className="mt-5 flex flex-col font-display text-[clamp(2.5rem,15vw,5.25rem)] uppercase leading-[0.88] tracking-tight text-heading">
+              <span>{hero.headline.lead}</span>
+              <span className="gold-foil">{hero.headline.accent}</span>
             </h1>
           </Reveal>
 
-          <Reveal delay={160}>
+          <Reveal delay={160} className="order-3">
             <p className="mt-7 max-w-lg text-base leading-[1.65] text-body sm:text-lg">
               {hero.subline}
             </p>
           </Reveal>
 
-          <ul className="mt-7 space-y-3 text-sm leading-[1.65] text-heading/90 sm:text-base">
+          <ul className="order-6 mt-7 space-y-3 text-sm leading-[1.65] text-heading/90 sm:text-base">
             {hero.bullets.map((bullet, index) => (
               <Reveal as="li" key={bullet} delay={220 + index * 70} className="flex gap-3">
                 <span
@@ -51,7 +53,7 @@ export function Hero() {
             ))}
           </ul>
 
-          <Reveal delay={460}>
+          <Reveal delay={460} className="order-4">
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button
                 asChild
@@ -73,7 +75,7 @@ export function Hero() {
           </Reveal>
         </div>
 
-        <Reveal delay={200} className="relative mx-auto w-full max-w-[520px]">
+        <Reveal delay={200} className="order-5 relative mx-auto mt-10 w-full max-w-[520px] lg:mt-0">
           <div aria-hidden="true" className="absolute -inset-10 rounded-full bg-gold/5 blur-3xl" />
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-gold/20 bg-panel">
             <img

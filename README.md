@@ -1,7 +1,7 @@
 # Harshika Academy
 
 Single-page marketing site for Harshika Academy, a coaching institute in
-Jabalpur run by Mohit Sarathe. One scroll, no internal routing — every nav link
+Bhairunda, Madhya Pradesh, run by Mohit Sarathe. One scroll, no internal routing — every nav link
 is an anchor to a section on the same page.
 
 The page has one job: convince a parent to tap WhatsApp or call. The audience is
@@ -45,21 +45,14 @@ Swapping a photo means replacing a URL in that file. Every image sits in a
 fixed aspect-ratio box, so a replacement of any dimensions will not shift the
 layout.
 
-## The two themes
+## Theme
 
-Both routes render the same sections from the same data.
+The site is warm off-white with gold accents by default, plus a **dark mode**
+(gold on near-black) behind the header switch.
 
-| Route | Theme                                                                                                                  |
-| ----- | ---------------------------------------------------------------------------------------------------------------------- |
-| `/`   | Warm off-white with gold accents by default, plus a **dark mode** (gold on near-black) behind the header switch.       |
-| `/v2` | The readable variant. Warm cream canvas, an ink type scale, sentence-case headings, lime reserved for primary buttons. |
+Section components are one file each, in `src/components/academy/`.
 
-`/v2` is marked `noindex` so the two copies do not compete in search.
-
-Section components are one file each, in `src/components/academy/` and
-`src/components/academy-v2/`.
-
-## Design system — `/`
+## Design system
 
 **Light is the default; dark is opt-in.** The switch lives in the header (and in
 the mobile menu), the choice is remembered in `localStorage`, and an inline
@@ -92,22 +85,6 @@ Three splits make the light mode work, and they are easy to undo by accident:
 
 Display type is Anton in all caps; body is Plus Jakarta Sans at 1.65 line
 height; eyebrows are Inter 600, uppercase, `0.18em` tracking.
-
-## Design system — `/v2`
-
-| Token                       | Hex                   | Use                          |
-| --------------------------- | --------------------- | ---------------------------- |
-| `--canvas`                  | `#F7F3EF`             | Page background              |
-| `--surface` / `--surface-2` | `#FBF7F2` / `#FEFCF9` | Sections, cards              |
-| `--line` / `--line-strong`  | `#E1DAD0` / `#B8AC9A` | Borders                      |
-| `--ink-1` → `--ink-4`       | `#0F0F0C` → `#A8A296` | Headings → placeholders      |
-| `--lime`                    | `#C6F25C`             | Primary CTA fill only        |
-| `--lime-strong`             | `#9FCC2B`             | Hover, active, small accents |
-
-Accent restraint is what makes this variant readable: lime only ever appears as
-a fill. It reaches 1.7:1 on cream, so it is never text and never a focus ring —
-an emphasised word gets a highlighter stroke behind it instead, and icons stay
-neutral ink.
 
 ## Conventions
 

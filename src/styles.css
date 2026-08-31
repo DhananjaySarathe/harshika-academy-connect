@@ -48,22 +48,6 @@
     "Plus Jakarta Sans", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-utility: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --color-danger: var(--danger);
-
-  /* --- /v2 readable theme (QuickAds palette) ------------------------------ */
-  --color-canvas: var(--canvas);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-line: var(--line);
-  --color-line-strong: var(--line-strong);
-  --color-ink-1: var(--ink-1);
-  --color-ink-2: var(--ink-2);
-  --color-ink-3: var(--ink-3);
-  --color-ink-4: var(--ink-4);
-  --color-lime: var(--lime);
-  --color-lime-tint: var(--lime-tint);
-  --color-lime-strong: var(--lime-strong);
-  --font-sans-readable:
-    "Plus Jakarta Sans", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 :root {
@@ -105,22 +89,6 @@
   --foil-c: #e3b23c;
   --shadow-tint: rgb(0 0 0 / 55%);
   --danger: #ff9b8a;
-
-  /* /v2 readable theme (QuickAds palette). Contrast on --canvas:
-     ink-1 17.4:1, ink-2 10.5:1, ink-3 4.8:1. --ink-4 is placeholders and
-     disabled text only; the limes are fills and borders only, never text. */
-  --canvas: #f7f3ef;
-  --surface: #fbf7f2;
-  --surface-2: #fefcf9;
-  --line: #e1dad0;
-  --line-strong: #b8ac9a;
-  --ink-1: #0f0f0c;
-  --ink-2: #3a362e;
-  --ink-3: #6b6459;
-  --ink-4: #a8a296;
-  --lime: #c6f25c;
-  --lime-tint: #e9f99c;
-  --lime-strong: #9fcc2b;
 }
 
 /* --- / light mode — the default. Keyed on :not([data-theme="dark"]) so a
@@ -306,37 +274,5 @@ html {
   .reveal {
     opacity: 1;
     transform: none;
-  }
-}
-
-/* --- /v2 readable theme --------------------------------------------------- */
-
-/* The dark body colour would otherwise show through when /v2 is overscrolled. */
-body:has(.theme-paper) {
-  background-color: var(--canvas);
-  color: var(--ink-2);
-}
-
-/* Lime is too light to read as text on cream (1.7:1), so the accent appears
-   behind the word as a highlighter stroke instead of colouring it. */
-@utility marker-lime {
-  position: relative;
-  display: inline;
-  background-image: linear-gradient(
-    to top,
-    var(--lime-tint) 0%,
-    var(--lime-tint) 38%,
-    transparent 38%
-  );
-  padding-inline: 0.06em;
-}
-
-/* Ink rather than lime: the accent only reaches 1.7:1 on cream, nowhere near
-   the 3:1 a focus indicator needs. */
-@utility focus-ring-ink {
-  &:focus-visible {
-    outline: 2px solid var(--ink-1);
-    outline-offset: 2px;
-    border-radius: inherit;
   }
 }
