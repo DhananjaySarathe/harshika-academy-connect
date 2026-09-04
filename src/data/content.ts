@@ -385,37 +385,157 @@ export type ResultCard = {
   name: string;
   className: string;
   result: string;
-  /** Context line under the score, e.g. which test it was. */
-  note: string;
+  /**
+   * Context line under the score, e.g. which exam it was. Optional: better an
+   * empty line than an invented exam name.
+   */
+  note?: string;
   initials: string;
+  /**
+   * Portrait in `public/assets/students/`. Cards fall back to initials when a
+   * student has no photograph, so a missing file never shows a broken image.
+   */
+  image?: string;
 };
 
 /**
- * Real students, real marks, taken from the Navodaya Test 1 board.
- * Only the top scores are listed — publishing a child's low mark on a public
- * page is not something the academy needs to do.
+ * Real students, real results, supplied by the academy. Only achievements the
+ * academy chose to publish — a child's low mark has no business on a public
+ * page. Photographs are published with the academy's consent; students without
+ * one fall back to initials.
  */
 export const results: ResultCard[] = [
+  // Strongest first: the two who cleared the Navodaya entrance, then rank
+  // holders, then marks descending.
   {
-    name: "Harsita Panwar",
+    name: "Pratika Panwar",
     className: "Navodaya Batch",
-    result: "85",
-    note: "Navodaya Test 1",
-    initials: "HP",
+    result: "Qualified",
+    note: "Navodaya entrance exam",
+    initials: "PP",
+    image: "/assets/students/pratika-panwar.webp",
   },
   {
-    name: "Apechha Pandey",
+    name: "Sonali Sahu",
     className: "Navodaya Batch",
-    result: "67.5",
-    note: "Navodaya Test 1",
+    result: "Qualified",
+    note: "Navodaya entrance exam",
+    initials: "SS",
+    image: "/assets/students/sonali-sahu.webp",
+  },
+  {
+    name: "Akshita Goswami",
+    className: "Class 4",
+    result: "Rank 1",
+    note: "Annual examination 2026",
+    initials: "AG",
+    image: "/assets/students/akshita-goswami.webp",
+  },
+  {
+    name: "Yashvardan Rajput",
+    className: "Class 2",
+    result: "Rank 2",
+    initials: "YR",
+    image: "/assets/students/yashvardan-rajput.webp",
+  },
+  {
+    name: "Harshika Sarathe",
+    className: "KG 1",
+    result: "Rank 1",
+    initials: "HS",
+    image: "/assets/students/harshika-sarathe.webp",
+  },
+  {
+    name: "Yash Maheswari",
+    className: "Class 3",
+    result: "91%",
+    initials: "YM",
+    image: "/assets/students/yash-maheswari.webp",
+  },
+  {
+    name: "Varsha Goswami",
+    className: "Class 8 · MP Board",
+    result: "88%",
+    initials: "VG",
+    image: "/assets/students/varsha-goswami.webp",
+  },
+  {
+    name: "Ayushi Goswami",
+    className: "Class 5",
+    result: "88%",
+    initials: "AG",
+    image: "/assets/students/ayushi-goswami.webp",
+  },
+  {
+    name: "Sidhhi Thakur",
+    className: "Class 5",
+    result: "84%",
+    initials: "ST",
+    image: "/assets/students/sidhhi-thakur.webp",
+  },
+  {
+    name: "Apeksha Pandey",
+    className: "Class 5",
+    result: "83%",
     initials: "AP",
+    image: "/assets/students/apeksha-pandey.webp",
   },
   {
-    name: "Paridhi Sahu",
-    className: "Navodaya Batch",
-    result: "65",
-    note: "Navodaya Test 1",
+    name: "Bhavesh Sarthe",
+    className: "Class 4",
+    result: "82%",
+    initials: "BS",
+    image: "/assets/students/bhavesh-sarthe.webp",
+  },
+  {
+    name: "Shivansh Thakur",
+    className: "Class 2",
+    result: "81%",
+    initials: "ST",
+    image: "/assets/students/shivansh-thakur.webp",
+  },
+  {
+    name: "Ayushi Chouhan",
+    className: "Class 2",
+    result: "79%",
+    initials: "AC",
+    image: "/assets/students/ayushi-chouhan.webp",
+  },
+  {
+    name: "Vihaan Rajput",
+    className: "Class 4",
+    result: "78%",
+    initials: "VR",
+    image: "/assets/students/vihaan-rajput.webp",
+  },
+
+  {
+    name: "Pratigya Sarthe",
+    className: "Class 10",
+    result: "63%",
     initials: "PS",
+    image: "/assets/students/pratigya-sarthe.webp",
+  },
+  {
+    name: "Yogendra Panwar",
+    className: "Class 7",
+    result: "81%",
+    initials: "YP",
+    image: "/assets/students/yogendra-panwar.webp",
+  },
+  {
+    name: "Aditya Vyash",
+    className: "Class 4",
+    result: "91%",
+    initials: "AV",
+    image: "/assets/students/aditya-vyash.webp",
+  },
+  {
+    name: "Ragwendra Keer",
+    className: "Class 4",
+    result: "78%",
+    initials: "RK",
+    image: "/assets/students/ragwendra-keer.webp",
   },
 ];
 

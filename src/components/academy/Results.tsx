@@ -191,16 +191,30 @@ export function Results() {
                 tabIndex={0}
                 className="focus-ring relative w-[270px] shrink-0 snap-start overflow-hidden rounded-2xl border border-gold/[0.18] bg-panel sm:w-[320px]"
               >
-                {/* Initials, not a photograph: we do not hold consent to publish
-                    these students' faces. Swap in a portrait once we do. */}
-                <div
-                  aria-hidden="true"
-                  className="flex aspect-[4/3] w-full items-center justify-center border-b border-gold/[0.18] bg-gold/[0.06]"
-                >
-                  <span className="font-display text-5xl uppercase tracking-[0.1em] text-gold/70">
-                    {item.initials}
-                  </span>
-                </div>
+                {/* A portrait where the academy holds one, initials otherwise —
+                    the two share a 4:5 box so a mixed row still lines up. The
+                    files are already cropped to 4:5, so there is nothing for
+                    object-position to shift. */}
+                {item.image ? (
+                  <img
+                    src={item.image}
+                    alt={`${item.name}, ${item.className} student at Harshika Academy`}
+                    loading="lazy"
+                    decoding="async"
+                    width={800}
+                    height={1000}
+                    className="aspect-[4/5] w-full border-b border-gold/[0.18] object-cover"
+                  />
+                ) : (
+                  <div
+                    aria-hidden="true"
+                    className="flex aspect-[4/5] w-full items-center justify-center border-b border-gold/[0.18] bg-gold/[0.06]"
+                  >
+                    <span className="font-display text-5xl uppercase tracking-[0.1em] text-gold/70">
+                      {item.initials}
+                    </span>
+                  </div>
+                )}
                 <div className="p-5">
                   <p className="font-utility text-[10px] uppercase tracking-wider text-gold">
                     {item.className}
@@ -209,7 +223,7 @@ export function Results() {
                   <p className="mt-3 font-display text-2xl uppercase leading-tight text-gold">
                     {item.result}
                   </p>
-                  <p className="mt-2 text-xs text-body">{item.note}</p>
+                  {item.note ? <p className="mt-2 text-xs text-body">{item.note}</p> : null}
                 </div>
               </article>
             ))}
