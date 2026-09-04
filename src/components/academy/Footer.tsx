@@ -13,7 +13,7 @@ export function Footer() {
             {academy.tagline}
           </p>
           <p className="mt-4 max-w-xs text-sm leading-[1.65] text-body">
-            A local academy in {academy.city} for clear concepts, steady practice and honest
+            A coaching academy in {academy.city} for clear concepts, steady practice and honest
             guidance.
           </p>
         </div>
