@@ -509,28 +509,6 @@ export const results: ResultCard[] = [
     image: "/assets/students/vihaan-rajput.webp",
   },
 
-  // Internal Navodaya mock, kept from the whiteboard photo.
-  {
-    name: "Harsita Panwar",
-    className: "Navodaya Batch",
-    result: "85",
-    note: "Navodaya Test 1",
-    initials: "HP",
-  },
-  {
-    name: "Apechha Pandey",
-    className: "Navodaya Batch",
-    result: "67.5",
-    note: "Navodaya Test 1",
-    initials: "AP",
-  },
-  {
-    name: "Paridhi Sahu",
-    className: "Navodaya Batch",
-    result: "65",
-    note: "Navodaya Test 1",
-    initials: "PS",
-  },
   {
     name: "Pratigya Sarthe",
     className: "Class 10",
