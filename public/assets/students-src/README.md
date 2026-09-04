@@ -42,3 +42,6 @@ add weight for nothing once cropped.
 | yash-maheswari    | 17.39.15 | 900x1350  | 0   |
 | ayushi-goswami    | 17.40.00 | 720x1280  | 0   |
 | apeksha-pandey    | 17.40.57 | 517x1156  | 110 |
+| sidhhi-thakur     | 17.42.12 | 720x1600  | 228 |
+| ayushi-chouhan    | 17.43.16 | 720x1600  | 308 |
+| shivansh-thakur   | 17.44.07 | 720x1600  | 212 |
