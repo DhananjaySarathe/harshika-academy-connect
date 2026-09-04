@@ -23,7 +23,7 @@ export const academy = {
   phone: phoneDisplay,
   phoneE164,
   phoneHref,
-  email: "academy@harshikaacademy.in",
+  email: "harshikaacademy@gmail.com",
   addressLine: "Neelkanth Road, Ward No. 10",
   /** Locals navigate by the college, not the road name. */
   landmark: "Near SVN Govt. College",
@@ -34,10 +34,13 @@ export const academy = {
   country: "IN",
   timings: "Monday – Saturday · 8:00 AM – 7:00 PM",
   openingHours: "Mo-Sa 08:00-19:00",
+  /**
+   * Real profiles only — these feed the footer, the contact block and the
+   * `sameAs` array in the JSON-LD, where a placeholder link is worse than
+   * no link at all. Add Instagram and Facebook here once the handles exist.
+   */
   social: [
-    { label: "Instagram", href: "https://www.instagram.com/" },
-    { label: "Facebook", href: "https://www.facebook.com/" },
-    { label: "YouTube", href: "https://www.youtube.com/" },
+    { label: "YouTube", href: "https://www.youtube.com/@studywithharshi" },
   ] satisfies SocialLink[],
 };
 
