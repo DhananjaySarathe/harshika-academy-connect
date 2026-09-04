@@ -345,7 +345,7 @@ html.lenis {
    Everywhere else the markup is a plain horizontal scroller. */
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
-    .results-rail {
+    .results-rail.is-rail {
       view-timeline-name: --rail;
       view-timeline-axis: block;
       /* One viewport to pin, then ~300px of runway per card. */
@@ -354,7 +354,7 @@ html.lenis {
       /* Where the content column starts, so the track lines up with it. */
       --rail-pad: max(1.5rem, calc((100vw - 1200px) / 2 + 1.5rem));
     }
-    .results-pin {
+    .is-rail .results-pin {
       position: sticky;
       top: 0;
       display: flex;
@@ -363,11 +363,11 @@ html.lenis {
       justify-content: center;
       overflow-x: clip;
     }
-    .results-inner {
+    .is-rail .results-inner {
       max-width: none;
       padding-inline: var(--rail-pad);
     }
-    .results-track {
+    .is-rail .results-track {
       width: max-content;
       overflow: visible;
       scroll-snap-type: none;
@@ -376,14 +376,14 @@ html.lenis {
       animation-timeline: --rail;
       animation-range: contain 0% contain 100%;
     }
-    .results-arrows,
-    .results-hint {
+    .is-rail .results-arrows,
+    .is-rail .results-hint {
       display: none;
     }
-    .results-progress {
+    .is-rail .results-progress {
       display: block;
     }
-    .results-progress > span {
+    .is-rail .results-progress > span {
       animation: rail-progress linear both;
       animation-timeline: --rail;
       animation-range: contain 0% contain 100%;

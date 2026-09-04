@@ -12,12 +12,13 @@ import { Reveal, SectionHeading } from "./shared";
  * Two behaviours from one markup, chosen by CSS (see `.results-rail` in
  * styles.css):
  *
- * - Rail mode — motion allowed and `animation-timeline` supported, on every
- *   viewport. The section grows tall, the heading and track pin, and the
+ * - Rail mode — the row overflows the viewport (measured), motion is allowed
+ *   and `animation-timeline` is supported, on every viewport. The section grows tall, the heading and track pin, and the
  *   page's vertical scroll drives the track sideways — on a phone that means
  *   a vertical swipe moves the row. A gold progress line runs the same
  *   timeline. Arrows and the swipe hint hide; the page IS the scroller.
- * - Fallback — reduced motion, or no scroll-driven animation (Firefox). The
+ * - Fallback — a row that already fits, reduced motion, or no scroll-driven
+ *   animation (Firefox). The
  *   original horizontal rail: native overflow, snap points, arrows on sm+,
  *   mouse drag on desktop.
  *
@@ -30,6 +31,7 @@ export function Results() {
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
   const [dragging, setDragging] = useState(false);
+  const [railable, setRailable] = useState(false);
   const reducedMotion = useReducedMotion();
 
   const syncEdges = useCallback(() => {
@@ -45,6 +47,25 @@ export function Results() {
     window.addEventListener("resize", syncEdges);
     return () => window.removeEventListener("resize", syncEdges);
   }, [syncEdges]);
+
+  /**
+   * The rail only earns its extra scroll length when the row actually
+   * overflows. With a handful of cards the track is narrower than the viewport
+   * and `-100% + 100vw` slides it the wrong way, behind a pinned heading with
+   * nothing to reveal — so measure, and let CSS fall back to the static row.
+   * The measurement is the content width, which is the same in either mode, so
+   * turning the rail on cannot flip the answer back off.
+   */
+  useEffect(() => {
+    const check = () => {
+      const track = trackRef.current;
+      if (!track) return;
+      setRailable(track.scrollWidth > window.innerWidth - 48);
+    };
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   /** Scroll by roughly one card, whatever the current breakpoint's card width is. */
   const scrollByCard = (direction: 1 | -1) => {
@@ -101,20 +122,25 @@ export function Results() {
     trackRef.current?.releasePointerCapture(event.pointerId);
   };
 
-  const showSampleTags = import.meta.env.DEV;
-
   return (
     <section
       ref={sectionRef}
       id="results"
-      className="results-rail scroll-mt-28 py-14 sm:py-24 lg:py-28"
+      className={cn("results-rail scroll-mt-28 py-14 sm:py-24 lg:py-28", railable && "is-rail")}
       style={{ "--rail-cards": results.length } as React.CSSProperties}
     >
       <div className="results-pin">
         <div className="results-inner mx-auto w-full max-w-[1200px] px-5 sm:px-6">
           <div className="flex items-end justify-between gap-5">
             <SectionHeading eyebrow="Our Results" title="Students Who" highlight="Made It Count" />
-            <div className="results-arrows hidden shrink-0 gap-2 sm:flex">
+            {/* Nothing to page through when the row already fits — a pair of
+                permanently disabled arrows just reads as broken. */}
+            <div
+              className={cn(
+                "results-arrows shrink-0 gap-2",
+                atStart && atEnd ? "hidden" : "hidden sm:flex",
+              )}
+            >
               <Button
                 variant="outline"
                 size="icon"
@@ -165,11 +191,6 @@ export function Results() {
                 tabIndex={0}
                 className="focus-ring relative w-[270px] shrink-0 snap-start overflow-hidden rounded-2xl border border-gold/[0.18] bg-panel sm:w-[320px]"
               >
-                {showSampleTags && item.placeholder ? (
-                  <span className="absolute right-3 top-3 z-10 rounded bg-danger px-1.5 py-0.5 font-utility text-[9px] font-bold uppercase tracking-wider text-white">
-                    sample
-                  </span>
-                ) : null}
                 {/* Initials, not a photograph: we do not hold consent to publish
                     these students' faces. Swap in a portrait once we do. */}
                 <div

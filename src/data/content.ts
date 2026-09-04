@@ -388,12 +388,6 @@ export type ResultCard = {
   /** Context line under the score, e.g. which test it was. */
   note: string;
   initials: string;
-  /**
-   * Not a real student. Placeholder cards exist only so the rail can be
-   * designed at volume; dev builds badge them "sample". Remove every one
-   * before this branch merges.
-   */
-  placeholder?: true;
 };
 
 /**
@@ -422,104 +416,6 @@ export const results: ResultCard[] = [
     result: "65",
     note: "Navodaya Test 1",
     initials: "PS",
-  },
-
-  // ---- PLACEHOLDERS — design filler, not students. Delete before merge. ----
-  {
-    name: "Riya Verma",
-    className: "Class 10 · MP Board",
-    result: "91%",
-    note: "Board exam 2025",
-    initials: "RV",
-    placeholder: true,
-  },
-  {
-    name: "Aman Patel",
-    className: "Class 9",
-    result: "88%",
-    note: "Half-yearly",
-    initials: "AP",
-    placeholder: true,
-  },
-  {
-    name: "Kavya Rathore",
-    className: "Class 8",
-    result: "61% → 84%",
-    note: "One academic year",
-    initials: "KR",
-    placeholder: true,
-  },
-  {
-    name: "Dev Malviya",
-    className: "Class 7",
-    result: "Top of class",
-    note: "Annual exam",
-    initials: "DM",
-    placeholder: true,
-  },
-  {
-    name: "Anjali Chouhan",
-    className: "Class 6",
-    result: "92%",
-    note: "Annual exam",
-    initials: "AC",
-    placeholder: true,
-  },
-  {
-    name: "Rohit Meena",
-    className: "Navodaya Batch",
-    result: "78",
-    note: "Navodaya Test 2",
-    initials: "RM",
-    placeholder: true,
-  },
-  {
-    name: "Nisha Sahu",
-    className: "Class 4",
-    result: "95%",
-    note: "Annual exam",
-    initials: "NS",
-    placeholder: true,
-  },
-  {
-    name: "Arjun Yadav",
-    className: "Class 3",
-    result: "A+",
-    note: "All subjects",
-    initials: "AY",
-    placeholder: true,
-  },
-  {
-    name: "Pooja Solanki",
-    className: "Class 10 · CBSE",
-    result: "89%",
-    note: "Board exam 2025",
-    initials: "PS",
-    placeholder: true,
-  },
-  {
-    name: "Vivek Thakur",
-    className: "Class 9",
-    result: "52% → 79%",
-    note: "Two terms",
-    initials: "VT",
-    placeholder: true,
-  },
-  {
-    name: "Aarav Jain",
-    className: "Nursery – KG",
-    result: "Reads fluently",
-    note: "Within one year",
-    initials: "AJ",
-    placeholder: true,
-  },
-  {
-    name: "Meera Panwar",
-    className: "Class 8",
-    result: "Olympiad",
-    note: "School round 2025",
-    initials: "MP",
-    placeholder: true,
   },
 ];
 

@@ -67,14 +67,13 @@ course stack uses it so the deck sits on ink in light mode too.
 
 Two more scroll-linked pieces, both pure CSS on named view timelines:
 
-- **Results rail** (`Results.tsx`, `.results-*`): with motion allowed and
-  `animation-timeline` supported — on every viewport, phones included — the
+- **Results rail** (`Results.tsx`, `.results-*`): when the row overflows the viewport,
+  motion is allowed and `animation-timeline` is supported — phones included — the
   section grows to `100svh + 300px × cards`, the heading and track pin, and
   vertical scroll slides the track sideways with a gold progress line.
   Reduced motion and Firefox get the plain horizontal swipe rail. Keyboard: the track's focus handler moves the page so
   a focused card lands on screen, since a transform cannot be scrolled into
-  view natively. Cards flagged `placeholder: true` are design filler and wear
-  a "sample" badge in dev — none may reach `main`.
+  view natively.
 - **About** (`About.tsx`, `.about-*`): the photo column pins on lg; the two
   photos and the ghosted word drift in opposite directions on the section's
   timeline so they read as separate layers. The pillars live in the copy
