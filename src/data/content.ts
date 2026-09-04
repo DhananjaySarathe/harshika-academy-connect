@@ -2,7 +2,7 @@
 // Harshika Academy — all editable site content lives here.
 //
 // This is the only file the academy needs to edit for day-to-day changes:
-// phone numbers, stats, courses, results, gallery photos, testimonials, FAQs.
+// phone numbers, stats, courses, results, gallery photos and FAQs.
 // The section components read from here and never hardcode copy.
 // -----------------------------------------------------------------------------
 
@@ -104,7 +104,7 @@ export const stats: Stat[] = [
   { value: 1000, suffix: "+", label: "Students Taught" },
   { value: 6, suffix: "", label: "Years of Teaching" },
   { value: 0, suffix: "", label: "CTET Qualified Faculty", display: "CTET" },
-  { value: 95, suffix: "%", label: "Average Score Improvement" },
+  { value: 0, suffix: "", label: "Classes Covered", display: "Nur–10" },
 ];
 
 // -- About --------------------------------------------------------------------
@@ -114,7 +114,7 @@ export type Pillar = { icon: PillarIcon; title: string; text: string };
 
 export const about = {
   paragraphs: [
-    "Harshika Academy started in a single room with six students and one rule: nobody leaves a class still confused. Mohit Sarathe had spent years watching bright children fall behind not because they could not learn, but because nobody slowed down for their question.",
+    "Harshika Academy teaches every class from Nursery to Class 10, across CBSE and MP Board, with a dedicated batch for children preparing for the Navodaya entrance. Classes are taken by Mohit Sarathe, who is CTET qualified.",
     "We believe a strong foundation matters more than a good report card. A student who understands why a method works will handle a question they have never seen before. A student who only memorised the steps will not.",
     "So we keep batches small, teach every topic from the basics up, and tell parents the truth about where their child stands — every week, not just before the exams.",
   ],
@@ -477,53 +477,6 @@ export const galleryItems: GalleryItem[] = [
     caption: "The whole academy, one afternoon",
     category: "Events",
     ratio: "square",
-  },
-];
-
-// -- Testimonials -------------------------------------------------------------
-
-export type Testimonial = {
-  quote: string;
-  name: string;
-  relation: string;
-  initials: string;
-};
-
-export const testimonials: Testimonial[] = [
-  {
-    quote:
-      "My daughter used to keep quiet when she did not understand. Here she asks questions freely. Her weekly test scores have become steady.",
-    name: "Sunita Sharma",
-    relation: "Parent of Class 9 student",
-    initials: "SS",
-  },
-  {
-    quote:
-      "Mohit Sir explains one idea in more than one way. That helped me understand algebra instead of just copying the steps.",
-    name: "Rohan Verma",
-    relation: "Class 8 student",
-    initials: "RV",
-  },
-  {
-    quote:
-      "We receive clear feedback, not only marks. It is helpful to know what to practise at home each week.",
-    name: "Amit Patel",
-    relation: "Parent of Class 10 student",
-    initials: "AP",
-  },
-  {
-    quote:
-      "The batch is small and the classes are calm. I started preparing before exams instead of waiting for the last month.",
-    name: "Ananya Joshi",
-    relation: "Class 10 student",
-    initials: "AJ",
-  },
-  {
-    quote:
-      "The academy gives equal attention to basics and test practice. We saw a real improvement in confidence first, then in marks.",
-    name: "Farah Khan",
-    relation: "Parent of Class 8 student",
-    initials: "FK",
   },
 ];
 
