@@ -385,17 +385,97 @@ export type ResultCard = {
   name: string;
   className: string;
   result: string;
-  /** Context line under the score, e.g. which test it was. */
-  note: string;
+  /**
+   * Context line under the score, e.g. which exam it was. Optional: better an
+   * empty line than an invented exam name.
+   */
+  note?: string;
   initials: string;
+  /**
+   * Portrait in `public/assets/students/`. Cards fall back to initials when a
+   * student has no photograph, so a missing file never shows a broken image.
+   */
+  image?: string;
+  /** object-position for the 4:5 crop, when centring misses the face. */
+  focal?: string;
 };
 
 /**
- * Real students, real marks, taken from the Navodaya Test 1 board.
- * Only the top scores are listed — publishing a child's low mark on a public
- * page is not something the academy needs to do.
+ * Real students, real results, supplied by the academy. Only achievements the
+ * academy chose to publish — a child's low mark has no business on a public
+ * page. Photographs are published with the academy's consent; students without
+ * one fall back to initials.
  */
 export const results: ResultCard[] = [
+  // Strongest first: the two who cleared the Navodaya entrance, then rank
+  // holders, then marks descending.
+  {
+    name: "Pratika Panwar",
+    className: "Navodaya Batch",
+    result: "Qualified",
+    note: "Navodaya entrance exam",
+    initials: "PP",
+    image: "/assets/students/pratika-panwar.webp",
+    focal: "50% 28%",
+  },
+  {
+    name: "Sonali Sahu",
+    className: "Navodaya Batch",
+    result: "Qualified",
+    note: "Navodaya entrance exam",
+    initials: "SS",
+  },
+  {
+    name: "Akshita Goswami",
+    className: "Class 4",
+    result: "Rank 1",
+    note: "Annual examination 2026",
+    initials: "AG",
+  },
+  {
+    name: "Yashvardan Rajput",
+    className: "Class 2",
+    result: "Rank 2",
+    initials: "YR",
+  },
+  {
+    name: "Yash Maheswari",
+    className: "Class 3",
+    result: "91%",
+    initials: "YM",
+  },
+  {
+    name: "Varsha Goswami",
+    className: "Class 8 \u00b7 MP Board",
+    result: "88%",
+    initials: "VG",
+  },
+  {
+    name: "Ayushi Goswami",
+    className: "Class 5",
+    result: "88%",
+    initials: "AG",
+  },
+  {
+    name: "Apeksha Pandey",
+    className: "Class 5",
+    result: "83%",
+    initials: "AP",
+  },
+  {
+    name: "Bhavesh Sarthe",
+    className: "Class 4",
+    result: "82%",
+    initials: "BS",
+  },
+  {
+    name: "Vihaan Rajput",
+    className: "Class 4",
+    result: "78%",
+    initials: "VR",
+  },
+
+  // Internal Navodaya mock, kept from the whiteboard photo.
   {
     name: "Harsita Panwar",
     className: "Navodaya Batch",
