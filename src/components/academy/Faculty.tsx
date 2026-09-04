@@ -74,10 +74,17 @@ function TeacherCard({ teacher, showHeading }: { teacher: Teacher; showHeading: 
         </Reveal>
 
         <Reveal delay={240}>
-          <p className="mt-5 inline-flex items-center gap-2 rounded bg-gold-fill px-4 py-2 font-utility text-xs font-bold uppercase tracking-wider text-on-gold">
-            <GraduationCap className="size-4" aria-hidden="true" />
-            {teacher.badge}
-          </p>
+          <ul className="mt-5 flex flex-wrap gap-2">
+            {teacher.badges.map((badge) => (
+              <li
+                key={badge}
+                className="inline-flex items-center gap-2 rounded bg-gold-fill px-4 py-2 font-utility text-xs font-bold uppercase tracking-wider text-on-gold"
+              >
+                <GraduationCap className="size-4" aria-hidden="true" />
+                {badge}
+              </li>
+            ))}
+          </ul>
         </Reveal>
 
         <Reveal delay={300}>

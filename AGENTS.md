@@ -40,6 +40,46 @@ Tailwind's `shadow-*` colour utilities do not re-resolve when the theme var
 changes, so themed elevation uses the `elevate-lg` / `elevate-md` utilities in
 `src/styles.css` instead.
 
+## Scroll motion
+
+Three layers, in order of how much they matter:
+
+- **Sticky stack** (`CourseStack.tsx`): the course cards are `position: sticky`
+  inside a tall container, each pinning at `--stack-top` plus an 18px step so
+  the deck shows a sliver of every card beneath. Pure CSS — do not add JS to
+  it. A pinned card taller than `viewport − --stack-top` never shows its
+  bottom (the next card covers it first), so the phone layout is compact on
+  purpose: keep every card under ~620px at 375×812.
+- **Scroll-driven reveals** (`styles.css`, inside `@supports
+(animation-timeline: view())`): `.reveal` fades and rises as it enters the
+  viewport, on the compositor, no listener. Browsers without support keep the
+  JS ticker in `use-motion.ts`. The reduced-motion block switches both off —
+  keep it that way.
+- **Lenis** (`lib/smooth-scroll.ts`): inertial wheel smoothing. Native scroll
+  events still fire, so scroll-spy and the progress bar are untouched. **Never
+  call `window.scrollTo` or `scrollIntoView` with `behavior: "smooth"` for a
+  window scroll** — two easings fight over one position. Use `scrollWindowTo()`
+  from the same module; it routes through Lenis when running and honours the
+  target's `scroll-margin-top`. Inner scrollers (the results rail) are fine.
+
+`ink-band` scopes the dark palette to one section regardless of theme; the
+course stack uses it so the deck sits on ink in light mode too.
+
+Two more scroll-linked pieces, both pure CSS on named view timelines:
+
+- **Results rail** (`Results.tsx`, `.results-*`): when the row overflows the viewport,
+  motion is allowed and `animation-timeline` is supported — phones included — the
+  section grows to `100svh + 300px × cards`, the heading and track pin, and
+  vertical scroll slides the track sideways with a gold progress line.
+  Reduced motion and Firefox get the plain horizontal swipe rail. Keyboard: the track's focus handler moves the page so
+  a focused card lands on screen, since a transform cannot be scrolled into
+  view natively.
+- **About** (`About.tsx`, `.about-*`): the photo column pins on lg; the two
+  photos and the ghosted word drift in opposite directions on the section's
+  timeline so they read as separate layers. The pillars live in the copy
+  column on purpose — that column has to be taller than the photos or there
+  is no runway for the pin.
+
 ## House rules
 
 - **No fees, prices or payment information anywhere on the page.** Batch timings

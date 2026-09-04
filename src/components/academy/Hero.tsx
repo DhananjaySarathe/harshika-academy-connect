@@ -29,7 +29,7 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={80} className="order-2">
-            <h1 className="mt-5 flex flex-col font-display text-[clamp(2.5rem,15vw,5.25rem)] uppercase leading-[0.88] tracking-tight text-heading">
+            <h1 className="mt-5 flex flex-col font-display text-[clamp(2.5rem,13vw,4.75rem)] uppercase leading-[0.88] tracking-tight text-heading">
               <span>{hero.headline.lead}</span>
               <span className="gold-foil">{hero.headline.accent}</span>
             </h1>
@@ -75,7 +75,10 @@ export function Hero() {
           </Reveal>
         </div>
 
-        <Reveal delay={200} className="order-5 relative mx-auto mt-10 w-full max-w-[520px] lg:mt-0">
+        <Reveal
+          delay={200}
+          className="hero-drift order-5 relative mx-auto mt-10 w-full max-w-[520px] lg:mt-0"
+        >
           <div aria-hidden="true" className="absolute -inset-10 rounded-full bg-gold/5 blur-3xl" />
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-gold/20 bg-panel">
             <img

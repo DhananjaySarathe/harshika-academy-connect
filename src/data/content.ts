@@ -13,6 +13,51 @@ export const phoneHref = `tel:${phoneE164}`;
 export const whatsappUrl =
   "https://wa.me/919171164151?text=Hi%2C%20I%20want%20to%20know%20about%20admission%20at%20Harshika%20Academy";
 
+/** A WhatsApp link whose opening message names the batch being asked about. */
+export function whatsappFor(topic: string) {
+  const text = `Hi, I want to ask about the ${topic} batch at Harshika Academy`;
+  return `https://wa.me/919171164151?text=${encodeURIComponent(text)}`;
+}
+
+/** wa.me wants the number without the leading plus. */
+const waNumber = phoneE164.slice(1);
+
+export type EnquiryFields = {
+  studentName: string;
+  parentName: string;
+  phone: string;
+  studentClass: string;
+  subjects: string;
+  message: string;
+};
+
+/**
+ * The enquiry form has no backend, so the enquiry travels as a message the
+ * parent sends themselves — from their own number, which means the academy can
+ * reply in the same thread instead of copying a number out of an email.
+ *
+ * Both links carry the identical body. Optional lines are dropped when blank so
+ * the academy never receives an empty "Subjects:".
+ */
+export function enquiryLinks(fields: EnquiryFields) {
+  const lines = [
+    `Student: ${fields.studentName.trim()}`,
+    `Parent: ${fields.parentName.trim()}`,
+    `Phone: ${fields.phone.trim()}`,
+    `Class: ${fields.studentClass}`,
+  ];
+  if (fields.subjects.trim()) lines.push(`Subjects: ${fields.subjects.trim()}`);
+  if (fields.message.trim()) lines.push(`Message: ${fields.message.trim()}`);
+
+  const body = `Hi ${academy.name}, I would like to enquire about admission.\n\n${lines.join("\n")}`;
+  const subject = `Admission enquiry - ${fields.studentName.trim()}`;
+
+  return {
+    whatsapp: `https://wa.me/${waNumber}?text=${encodeURIComponent(body)}`,
+    mailto: `mailto:${academy.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+  };
+}
+
 export type SocialLink = { label: string; href: string };
 
 export const academy = {
@@ -80,8 +125,8 @@ export const hero = {
    * rather than repeating the brand name. Split so the second half can take
    * the gold treatment.
    */
-  headline: { lead: "Concepts that", accent: "actually click" },
-  subline: "Taught by Mohit Sarathe — CTET-qualified, in small batches.",
+  headline: { lead: "From confidence", accent: "to clarity" },
+  subline: "Taught by Mohit Sarathe — CTET & MPPSC Pre Qualified — Where Concepts Become Clear.",
   bullets: [
     "Small batches, so every student gets attention",
     "Concepts explained until they actually click",
@@ -114,7 +159,8 @@ export type Pillar = { icon: PillarIcon; title: string; text: string };
 
 export const about = {
   paragraphs: [
-    "Harshika Academy teaches every class from Nursery to Class 10, across CBSE and MP Board, with a dedicated batch for children preparing for the Navodaya entrance. Classes are taken by Mohit Sarathe, who is CTET qualified.",
+    "Harshika Academy is dedicated to helping students prepare for competitive and entrance examinations, including Jawahar Navodaya Vidyalaya (JNV), Sainik School, Rashtriya Military School (RMS), and other school-level entrance and competitive exams.",
+    "Alongside our exam-focused programs, we also conduct regular classes from Nursery to Class 10, ensuring students receive strong academic support and conceptual clarity.",
     "We believe a strong foundation matters more than a good report card. A student who understands why a method works will handle a question they have never seen before. A student who only memorised the steps will not.",
     "So we keep batches small, teach every topic from the basics up, and tell parents the truth about where their child stands — every week, not just before the exams.",
   ],
@@ -140,8 +186,8 @@ export const pillars: Pillar[] = [
 
 export const aboutImages = {
   classroom: {
-    src: "/assets/classroom-wide.webp",
-    alt: "A morning batch at Harshika Academy, students seated at low desks with the whiteboard behind them",
+    src: "/assets/whole-academy.webp",
+    alt: "The whole academy together for a group photograph in the classroom",
   },
   student: {
     src: "/assets/classroom-desks.webp",
@@ -158,117 +204,130 @@ export type Subject = {
   name: string;
   icon: SubjectIcon;
   description: string;
-  timing: "Morning" | "Evening";
 };
 
-export type CourseTab = { id: string; label: string; subjects: Subject[] };
+export type CourseTab = {
+  id: string;
+  label: string;
+  /** One line under the label on the course card. */
+  tagline: string;
+  /** A real photograph from that batch; the card is built around it. */
+  image: string;
+  alt: string;
+  /**
+   * CSS object-position for the card's photo. The desktop box is squarer than
+   * the photographs, so this picks which part survives the crop. Omit = centre.
+   */
+  focal?: string;
+  subjects: Subject[];
+};
 
 export const courseTabs: CourseTab[] = [
   {
     id: "nursery-class-5",
     label: "Nursery – Class 5",
+    tagline: "Foundations, at the child's own pace.",
+    image: "/assets/one-to-one-help.webp",
+    alt: "Mohit Sarathe working one-to-one with a young student at a desk",
+    // Mohit is at the left edge, the student at the right; this keeps both.
+    focal: "58% 50%",
     subjects: [
       {
         name: "Reading & Writing",
         icon: "english",
         description: "Letters, sounds and handwriting, at the child's own pace.",
-        timing: "Morning",
       },
       {
         name: "Early Maths",
         icon: "maths",
         description: "Counting, tables, shapes and number sense before the tricks.",
-        timing: "Morning",
       },
       {
         name: "EVS & General Awareness",
         icon: "science",
         description: "The world around them, explained in questions they already ask.",
-        timing: "Evening",
       },
     ],
   },
   {
     id: "class-6-8",
     label: "Class 6 – Class 8",
+    tagline: "Where the concepts start to connect.",
+    image: "/assets/classroom-wide.webp",
+    alt: "A middle-school batch seated at low desks during a lesson",
     subjects: [
       {
         name: "Mathematics",
         icon: "maths",
         description: "Number sense, algebra basics, geometry and problem-solving.",
-        timing: "Evening",
       },
       {
         name: "Science",
         icon: "science",
         description: "Living world, matter, energy and everyday experiments.",
-        timing: "Morning",
       },
       {
         name: "English",
         icon: "english",
         description: "Grammar, reading and writing with confidence.",
-        timing: "Evening",
       },
       {
         name: "Social Science",
         icon: "social",
         description: "History, civics and geography tied to things they know.",
-        timing: "Morning",
       },
     ],
   },
   {
     id: "class-9-10",
     label: "Class 9 – Class 10",
+    tagline: "Board-ready, one week at a time.",
+    image: "/assets/test-day.webp",
+    alt: "Students writing a weekly test on the classroom floor mats",
     subjects: [
       {
         name: "Mathematics",
         icon: "maths",
         description: "Board-ready concepts, proofs and timed practice.",
-        timing: "Evening",
       },
       {
         name: "Science",
         icon: "science",
         description: "Physics, Chemistry and Biology from first principles.",
-        timing: "Morning",
       },
       {
         name: "Social Science",
         icon: "social",
         description: "History, civics, geography and economics made clear.",
-        timing: "Evening",
       },
       {
         name: "English",
         icon: "english",
         description: "Comprehension, writing skills and board answer practice.",
-        timing: "Morning",
       },
     ],
   },
   {
     id: "navodaya",
     label: "Navodaya Prep",
+    tagline: "The entrance, prepared for properly.",
+    image: "/assets/navodaya-results.webp",
+    alt: "Navodaya Test 1 results on the whiteboard, with students holding their answer sheets",
     subjects: [
       {
         name: "Mental Ability",
         icon: "reasoning",
         description: "Patterns, figures and odd-one-out, practised until they are quick.",
-        timing: "Morning",
       },
       {
         name: "Arithmetic",
         icon: "maths",
         description: "The calculation speed the entrance paper actually demands.",
-        timing: "Evening",
       },
       {
         name: "Language",
         icon: "english",
         description: "Passage reading and comprehension under exam timing.",
-        timing: "Evening",
       },
     ],
   },
@@ -282,7 +341,8 @@ export type Teacher = {
   image: string;
   alt: string;
   qualifications: string[];
-  badge: string;
+  /** Credential pills, shown in order. */
+  badges: string[];
   /** Written in the teacher's own voice. */
   note: string;
   quote: string;
@@ -295,7 +355,7 @@ export const faculty: Teacher[] = [
     image: "/assets/mohit-teaching.webp",
     alt: "Mohit Sarathe holding a piece of chalk in front of the classroom blackboard at Harshika Academy",
     qualifications: ["B.A.", "M.A.", "PGDCA", "D.El.Ed."],
-    badge: "CTET Qualified",
+    badges: ["CTET Qualified", "MPPSC Pre Qualified"],
     note: "I teach the way I wish I had been taught. One idea at a time, with an example from something the student already knows — a cricket score, a shop bill, a bus timing. If a child cannot explain it back to me in their own words, we have not finished the topic. I would rather cover less and have it stay.",
     quote: "A student who understands the 'why' never forgets the 'what'.",
   },
