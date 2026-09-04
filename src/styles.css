@@ -72,6 +72,8 @@
   --input: oklch(0.76 0.16 82 / 25%);
   --ring: oklch(0.86 0.13 86);
   color-scheme: dark;
+  /* Clearance under the fixed header for pinned stack cards. */
+  --stack-top: 88px;
   --page: #0b0e14;
   --panel: #141926;
   --heading: #ffffff;
@@ -256,6 +258,208 @@ html {
   filter: invert(0.92) hue-rotate(180deg) brightness(0.95) contrast(0.9) saturate(0.6);
 }
 
+/* --- Scroll motion ------------------------------------------------------- */
+
+/* Lenis drives window.scrollTo every frame. If the browser also eases each of
+   those, the two fight. Keyed on the class Lenis always adds, not the
+   conditional `lenis-smooth` one. */
+html.lenis {
+  scroll-behavior: auto !important;
+}
+
+/* A section that stays on ink in both themes. Redeclares the semantic tokens so
+   every `text-heading` / `bg-panel` / `text-gold` inside resolves to the dark
+   palette without touching the rest of the page. */
+@utility ink-band {
+  --page: #0b0e14;
+  --panel: #141926;
+  --heading: #ffffff;
+  --body: #b9bfcc;
+  --on-gold: #0b0e14;
+  --gold: #e3b23c;
+  --gold-bright: #f7dc8a;
+  --gold-deep: #a97c1e;
+  --gold-fill: #e3b23c;
+  --gold-fill-strong: #f7dc8a;
+  --foil-a: #a97c1e;
+  --foil-b: #f7dc8a;
+  --foil-c: #e3b23c;
+  --shadow-tint: rgb(0 0 0 / 55%);
+  color-scheme: dark;
+  background-color: var(--page);
+  color: var(--body);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --stack-top: 100px;
+  }
+}
+
+/* Where the browser can drive animation from scroll position, reveals stop
+   being a JS-toggled transition and become scroll-linked: each element fades
+   and rises as it enters the viewport, on the compositor, with no listener.
+   Browsers without support keep the transition + ticker path above. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    transition: none;
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 45%;
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Hero portrait eases up and back as the page scrolls away from it. */
+  .hero-drift {
+    animation: hero-drift linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0px 80vh;
+  }
+
+  @keyframes hero-drift {
+    from {
+      opacity: 1;
+      transform: none;
+    }
+    to {
+      opacity: 0.55;
+      transform: translateY(-48px) scale(1.04);
+    }
+  }
+}
+
+/* --- Results rail: the page's vertical scroll drives the cards sideways --- */
+
+/* Wherever the browser can drive animation from scroll and the visitor has
+   not asked for less motion — phones included; a vertical swipe moves the row.
+   Everywhere else the markup is a plain horizontal scroller. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .results-rail.is-rail {
+      view-timeline-name: --rail;
+      view-timeline-axis: block;
+      /* One viewport to pin, then ~300px of runway per card. */
+      min-height: calc(100svh + var(--rail-cards, 12) * 300px);
+      padding-block: 0;
+      /* Where the content column starts, so the track lines up with it. */
+      --rail-pad: max(1.5rem, calc((100vw - 1200px) / 2 + 1.5rem));
+    }
+    .is-rail .results-pin {
+      position: sticky;
+      top: 0;
+      display: flex;
+      height: 100svh;
+      flex-direction: column;
+      justify-content: center;
+      overflow-x: clip;
+    }
+    .is-rail .results-inner {
+      max-width: none;
+      padding-inline: var(--rail-pad);
+    }
+    .is-rail .results-track {
+      width: max-content;
+      overflow: visible;
+      scroll-snap-type: none;
+      cursor: default;
+      animation: rail-slide linear both;
+      animation-timeline: --rail;
+      animation-range: contain 0% contain 100%;
+    }
+    .is-rail .results-arrows,
+    .is-rail .results-hint {
+      display: none;
+    }
+    .is-rail .results-progress {
+      display: block;
+    }
+    .is-rail .results-progress > span {
+      animation: rail-progress linear both;
+      animation-timeline: --rail;
+      animation-range: contain 0% contain 100%;
+    }
+  }
+}
+
+@keyframes rail-slide {
+  to {
+    /* -100% is the track's own width; end with its right edge at the pad. */
+    transform: translateX(calc(-100% + 100vw - 2 * var(--rail-pad, 1.5rem)));
+  }
+}
+
+@keyframes rail-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* --- About: two pinned photos drift against each other as the copy scrolls */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .about-section {
+      view-timeline-name: --about;
+      view-timeline-axis: block;
+    }
+    .about-photo-a,
+    .about-photo-b,
+    .about-ghost {
+      animation: linear both;
+      animation-timeline: --about;
+      animation-range: contain 0% contain 100%;
+    }
+    .about-photo-a {
+      animation-name: about-a;
+    }
+    .about-photo-b {
+      animation-name: about-b;
+    }
+    .about-ghost {
+      animation-name: about-ghost;
+    }
+  }
+}
+
+@keyframes about-a {
+  from {
+    transform: translateY(28px);
+  }
+  to {
+    transform: translateY(-28px);
+  }
+}
+
+@keyframes about-b {
+  from {
+    transform: translateY(-22px);
+  }
+  to {
+    transform: translateY(30px);
+  }
+}
+
+@keyframes about-ghost {
+  from {
+    transform: translateX(5vw);
+  }
+  to {
+    transform: translateX(-7vw);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -271,7 +475,14 @@ html {
   }
 
   /* Reveals must still end up visible — never leave content at opacity 0. */
-  .reveal {
+  .reveal,
+  .hero-drift,
+  .results-track,
+  .results-progress > span,
+  .about-photo-a,
+  .about-photo-b,
+  .about-ghost {
+    animation: none !important;
     opacity: 1;
     transform: none;
   }

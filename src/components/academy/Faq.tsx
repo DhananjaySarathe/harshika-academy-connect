@@ -15,12 +15,15 @@ export function Faq() {
       className="scroll-mt-28 border-y border-gold/10 bg-panel/50 px-5 py-14 sm:px-6 sm:py-24 lg:py-28"
     >
       <div className="mx-auto grid max-w-[1000px] gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-        <SectionHeading
-          eyebrow="Questions"
-          title="Before You"
-          highlight="Join"
-          intro="A few things parents usually ask before the first class."
-        />
+        {/* Pinned on lg so the heading keeps the questions company as they scroll. */}
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <SectionHeading
+            eyebrow="Questions"
+            title="Before You"
+            highlight="Join"
+            intro="A few things parents usually ask before the first class."
+          />
+        </div>
 
         <div className="divide-y divide-gold/15 border-y border-gold/15">
           {faqs.map((item, index) => {

@@ -86,6 +86,15 @@ Three splits make the light mode work, and they are easy to undo by accident:
 Display type is Anton in all caps; body is Plus Jakarta Sans at 1.65 line
 height; eyebrows are Inter 600, uppercase, `0.18em` tracking.
 
+## Scroll motion
+
+The Courses section is a deck of `position: sticky` cards that stack as you
+scroll — pure CSS, no JavaScript. Reveals are CSS scroll-driven animations
+(`animation-timeline: view()`) where the browser supports them, with the
+original JS fallback elsewhere. Wheel scrolling is smoothed with Lenis; window
+scrolls from code go through `scrollWindowTo()` so the two never fight. All of
+it is off under `prefers-reduced-motion`.
+
 ## Conventions
 
 - **No fees, prices or payment information anywhere on the page.** Batch timings

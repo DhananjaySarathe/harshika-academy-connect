@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import {
   academy,
   classOptions,
+  enquiryLinks,
   fullAddress,
   mapDirectionsUrl,
   mapEmbedUrl,
@@ -49,6 +50,7 @@ export function Contact() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [sent, setSent] = useState(false);
+  const [links, setLinks] = useState<ReturnType<typeof enquiryLinks> | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
 
   const setField = (field: keyof FormValues, value: string) => {
@@ -70,8 +72,14 @@ export function Contact() {
       return;
     }
 
-    // No backend on this site — the enquiry is confirmed inline and the academy
-    // is reached on WhatsApp or the phone. Wire a real endpoint in here later.
+    // No backend on this site, so the enquiry leaves as a WhatsApp message the
+    // parent sends from their own number — it reaches the phone the academy
+    // actually watches, and they can reply in the same thread. Opening inside
+    // the submit handler keeps the user gesture, so blockers normally allow the
+    // tab; if one blocks it anyway, the panel below still shows the link.
+    const built = enquiryLinks(values);
+    setLinks(built);
+    window.open(built.whatsapp, "_blank", "noopener,noreferrer");
     setSent(true);
   };
 
@@ -80,6 +88,7 @@ export function Contact() {
     setErrors({});
     setSubmitted(false);
     setSent(false);
+    setLinks(null);
   };
 
   return (
@@ -170,20 +179,38 @@ export function Contact() {
               Send An Enquiry
             </h3>
 
-            {sent ? (
+            {sent && links ? (
               <div className="mt-8 border-l-2 border-gold pl-5" role="status">
                 <p className="font-display text-2xl uppercase leading-tight text-gold">
-                  Enquiry sent.
+                  One tap left.
                 </p>
                 <p className="mt-2 text-sm leading-[1.65] text-body">
-                  We&rsquo;ll call you within a day.
+                  Your enquiry is written out and waiting in WhatsApp. Press send there and it
+                  reaches us straight away.
+                </p>
+                <Button
+                  asChild
+                  className="focus-ring mt-4 h-11 rounded-full bg-gold-fill px-5 font-utility text-xs font-bold uppercase tracking-widest text-on-gold transition-colors hover:bg-gold-fill-strong"
+                >
+                  <a href={links.whatsapp} target="_blank" rel="noreferrer noopener">
+                    Open WhatsApp
+                  </a>
+                </Button>
+                <p className="mt-4 text-xs leading-[1.65] text-body">
+                  Rather use email?{" "}
+                  <a
+                    href={links.mailto}
+                    className="focus-ring rounded font-semibold text-gold transition-colors hover:text-gold-bright"
+                  >
+                    Send the same enquiry by email.
+                  </a>
                 </p>
                 <Button
                   variant="link"
                   onClick={reset}
-                  className="focus-ring mt-3 h-auto px-0 text-gold"
+                  className="focus-ring mt-2 h-auto px-0 text-gold"
                 >
-                  Send another enquiry
+                  Start a new enquiry
                 </Button>
               </div>
             ) : (
@@ -270,19 +297,20 @@ export function Contact() {
                   type="submit"
                   className="focus-ring h-12 w-full rounded-full bg-gold-fill font-utility text-xs font-bold uppercase tracking-widest text-on-gold transition-colors hover:bg-gold-fill-strong"
                 >
-                  Send Enquiry
+                  Send Enquiry on WhatsApp
                 </Button>
 
                 <p className="text-center text-xs leading-[1.65] text-body">
-                  In a hurry?{" "}
+                  We reply fastest on WhatsApp. Prefer to{" "}
                   <a
                     href={whatsappUrl}
                     target="_blank"
                     rel="noreferrer noopener"
                     className="focus-ring rounded font-semibold text-gold transition-colors hover:text-gold-bright"
                   >
-                    Message us directly on WhatsApp.
-                  </a>
+                    just message us
+                  </a>{" "}
+                  instead?
                 </p>
               </form>
             )}

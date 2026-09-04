@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { academy, navItems, whatsappUrl } from "@/data/content";
 import { onViewportChange, useReducedMotion } from "@/hooks/use-motion";
+import { scrollWindowTo } from "@/lib/smooth-scroll";
 import { LogoLockup } from "./shared";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -60,7 +61,7 @@ export function Header() {
       const element = document.getElementById(id);
       if (!element) return;
       // scroll-mt-* on each section keeps the heading clear of the floating bar.
-      element.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+      scrollWindowTo(element, reducedMotion);
       setActive(id);
     },
     [reducedMotion],
