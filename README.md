@@ -1,4 +1,4 @@
-# Harshika Academy.
+# Harshika Academy
 
 Single-page marketing site for Harshika Academy, a coaching institute in
 Bhairunda, Madhya Pradesh, run by Mohit Sarathe. One scroll, no internal routing — every nav link
