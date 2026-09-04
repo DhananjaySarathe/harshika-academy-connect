@@ -439,6 +439,13 @@ export const results: ResultCard[] = [
     image: "/assets/students/yashvardan-rajput.webp",
   },
   {
+    name: "Harshika Sarathe",
+    className: "KG 1",
+    result: "Rank 1",
+    initials: "HS",
+    image: "/assets/students/harshika-sarathe.webp",
+  },
+  {
     name: "Yash Maheswari",
     className: "Class 3",
     result: "91%",
@@ -447,7 +454,7 @@ export const results: ResultCard[] = [
   },
   {
     name: "Varsha Goswami",
-    className: "Class 8 \u00b7 MP Board",
+    className: "Class 8 · MP Board",
     result: "88%",
     initials: "VG",
     image: "/assets/students/varsha-goswami.webp",
@@ -523,6 +530,34 @@ export const results: ResultCard[] = [
     result: "65",
     note: "Navodaya Test 1",
     initials: "PS",
+  },
+  {
+    name: "Pratigya Sarthe",
+    className: "Class 10",
+    result: "63%",
+    initials: "PS",
+    image: "/assets/students/pratigya-sarthe.webp",
+  },
+  {
+    name: "Yogendra Panwar",
+    className: "Class 7",
+    result: "81%",
+    initials: "YP",
+    image: "/assets/students/yogendra-panwar.webp",
+  },
+  {
+    name: "Aditya Vyash",
+    className: "Class 4",
+    result: "91%",
+    initials: "AV",
+    image: "/assets/students/aditya-vyash.webp",
+  },
+  {
+    name: "Ragwendra Keer",
+    className: "Class 4",
+    result: "78%",
+    initials: "RK",
+    image: "/assets/students/ragwendra-keer.webp",
   },
 ];
 

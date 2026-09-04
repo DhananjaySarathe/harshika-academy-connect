@@ -45,3 +45,12 @@ add weight for nothing once cropped.
 | sidhhi-thakur     | 17.42.12 | 720x1600  | 228 |
 | ayushi-chouhan    | 17.43.16 | 720x1600  | 308 |
 | shivansh-thakur   | 17.44.07 | 720x1600  | 212 |
+| pratigya-sarthe   | 17.45.48 | 720x1600  | 150 |
+| yogendra-panwar   | 17.49.13 | 720x1600  | 230 |
+| aditya-vyash      | 17.50.02 | 720x1600  | 250 |
+| ragwendra-keer    | 17.50.50 | 720x1600  | 140 |
+| harshika-sarathe  | 22.59.26 | 899x1599  | 159 |
+
+`harshika-sarathe` is the one candid in the set — she sits right of centre
+with floor and a pillar filling the left — so it also crops horizontally:
+`x=144`, width `700`. Everything else uses the full source width.
