@@ -86,8 +86,8 @@ export const hero = {
    * rather than repeating the brand name. Split so the second half can take
    * the gold treatment.
    */
-  headline: { lead: "Concepts that", accent: "actually click" },
-  subline: "Taught by Mohit Sarathe — CTET-qualified, in small batches.",
+  headline: { lead: "From confidence", accent: "to clarity" },
+  subline: "Taught by Mohit Sarathe — CTET & MPPSC Pre Qualified — Where Concepts Become Clear.",
   bullets: [
     "Small batches, so every student gets attention",
     "Concepts explained until they actually click",
@@ -120,7 +120,8 @@ export type Pillar = { icon: PillarIcon; title: string; text: string };
 
 export const about = {
   paragraphs: [
-    "Harshika Academy teaches every class from Nursery to Class 10, across CBSE and MP Board, with a dedicated batch for children preparing for the Navodaya entrance. Classes are taken by Mohit Sarathe, who is CTET qualified.",
+    "Harshika Academy is dedicated to helping students prepare for competitive and entrance examinations, including Jawahar Navodaya Vidyalaya (JNV), Sainik School, Rashtriya Military School (RMS), and other school-level entrance and competitive exams.",
+    "Alongside our exam-focused programs, we also conduct regular classes from Nursery to Class 10, ensuring students receive strong academic support and conceptual clarity.",
     "We believe a strong foundation matters more than a good report card. A student who understands why a method works will handle a question they have never seen before. A student who only memorised the steps will not.",
     "So we keep batches small, teach every topic from the basics up, and tell parents the truth about where their child stands — every week, not just before the exams.",
   ],
@@ -316,7 +317,8 @@ export type Teacher = {
   image: string;
   alt: string;
   qualifications: string[];
-  badge: string;
+  /** Credential pills, shown in order. */
+  badges: string[];
   /** Written in the teacher's own voice. */
   note: string;
   quote: string;
@@ -329,7 +331,7 @@ export const faculty: Teacher[] = [
     image: "/assets/mohit-teaching.webp",
     alt: "Mohit Sarathe holding a piece of chalk in front of the classroom blackboard at Harshika Academy",
     qualifications: ["B.A.", "M.A.", "PGDCA", "D.El.Ed."],
-    badge: "CTET Qualified",
+    badges: ["CTET Qualified", "MPPSC Pre Qualified"],
     note: "I teach the way I wish I had been taught. One idea at a time, with an example from something the student already knows — a cricket score, a shop bill, a bus timing. If a child cannot explain it back to me in their own words, we have not finished the topic. I would rather cover less and have it stay.",
     quote: "A student who understands the 'why' never forgets the 'what'.",
   },
