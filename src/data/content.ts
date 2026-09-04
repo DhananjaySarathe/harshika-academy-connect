@@ -165,7 +165,6 @@ export type Subject = {
   name: string;
   icon: SubjectIcon;
   description: string;
-  timing: "Morning" | "Evening";
 };
 
 export type CourseTab = {
@@ -198,19 +197,16 @@ export const courseTabs: CourseTab[] = [
         name: "Reading & Writing",
         icon: "english",
         description: "Letters, sounds and handwriting, at the child's own pace.",
-        timing: "Morning",
       },
       {
         name: "Early Maths",
         icon: "maths",
         description: "Counting, tables, shapes and number sense before the tricks.",
-        timing: "Morning",
       },
       {
         name: "EVS & General Awareness",
         icon: "science",
         description: "The world around them, explained in questions they already ask.",
-        timing: "Evening",
       },
     ],
   },
@@ -225,25 +221,21 @@ export const courseTabs: CourseTab[] = [
         name: "Mathematics",
         icon: "maths",
         description: "Number sense, algebra basics, geometry and problem-solving.",
-        timing: "Evening",
       },
       {
         name: "Science",
         icon: "science",
         description: "Living world, matter, energy and everyday experiments.",
-        timing: "Morning",
       },
       {
         name: "English",
         icon: "english",
         description: "Grammar, reading and writing with confidence.",
-        timing: "Evening",
       },
       {
         name: "Social Science",
         icon: "social",
         description: "History, civics and geography tied to things they know.",
-        timing: "Morning",
       },
     ],
   },
@@ -258,25 +250,21 @@ export const courseTabs: CourseTab[] = [
         name: "Mathematics",
         icon: "maths",
         description: "Board-ready concepts, proofs and timed practice.",
-        timing: "Evening",
       },
       {
         name: "Science",
         icon: "science",
         description: "Physics, Chemistry and Biology from first principles.",
-        timing: "Morning",
       },
       {
         name: "Social Science",
         icon: "social",
         description: "History, civics, geography and economics made clear.",
-        timing: "Evening",
       },
       {
         name: "English",
         icon: "english",
         description: "Comprehension, writing skills and board answer practice.",
-        timing: "Morning",
       },
     ],
   },
@@ -291,19 +279,16 @@ export const courseTabs: CourseTab[] = [
         name: "Mental Ability",
         icon: "reasoning",
         description: "Patterns, figures and odd-one-out, practised until they are quick.",
-        timing: "Morning",
       },
       {
         name: "Arithmetic",
         icon: "maths",
         description: "The calculation speed the entrance paper actually demands.",
-        timing: "Evening",
       },
       {
         name: "Language",
         icon: "english",
         description: "Passage reading and comprehension under exam timing.",
-        timing: "Evening",
       },
     ],
   },

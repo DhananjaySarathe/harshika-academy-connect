@@ -31,7 +31,7 @@ export function CourseStack() {
           eyebrow="Courses & Batches"
           title="What We"
           highlight="Teach"
-          intro="Nursery to Class 10 across CBSE and MP Board, plus a dedicated batch for the Navodaya entrance. Scroll through the four."
+          intro="Specialized preparation for school entrance exams like Navodaya, Sainik School & RMS, along with CBSE & MP Board classes from Nursery to Class 10."
         />
 
         <div className="mt-12 sm:mt-16">
@@ -89,9 +89,6 @@ export function CourseStack() {
                         <div>
                           <p className="font-utility text-sm font-semibold text-heading">
                             {subject.name}
-                            <span className="ml-2 font-normal text-body/70">
-                              · {subject.timing}
-                            </span>
                           </p>
                           <p className="mt-0.5 hidden text-sm leading-[1.6] text-body sm:block">
                             {subject.description}
