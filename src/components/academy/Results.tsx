@@ -192,7 +192,9 @@ export function Results() {
                 className="focus-ring relative w-[270px] shrink-0 snap-start overflow-hidden rounded-2xl border border-gold/[0.18] bg-panel sm:w-[320px]"
               >
                 {/* A portrait where the academy holds one, initials otherwise —
-                    the two share a 4:5 box so a mixed row still lines up. */}
+                    the two share a 4:5 box so a mixed row still lines up. The
+                    files are already cropped to 4:5, so there is nothing for
+                    object-position to shift. */}
                 {item.image ? (
                   <img
                     src={item.image}
@@ -201,7 +203,6 @@ export function Results() {
                     decoding="async"
                     width={800}
                     height={1000}
-                    style={item.focal ? { objectPosition: item.focal } : undefined}
                     className="aspect-[4/5] w-full border-b border-gold/[0.18] object-cover"
                   />
                 ) : (

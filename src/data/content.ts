@@ -396,8 +396,6 @@ export type ResultCard = {
    * student has no photograph, so a missing file never shows a broken image.
    */
   image?: string;
-  /** object-position for the 4:5 crop, when centring misses the face. */
-  focal?: string;
 };
 
 /**
@@ -416,7 +414,6 @@ export const results: ResultCard[] = [
     note: "Navodaya entrance exam",
     initials: "PP",
     image: "/assets/students/pratika-panwar.webp",
-    focal: "50% 28%",
   },
   {
     name: "Sonali Sahu",
@@ -424,6 +421,7 @@ export const results: ResultCard[] = [
     result: "Qualified",
     note: "Navodaya entrance exam",
     initials: "SS",
+    image: "/assets/students/sonali-sahu.webp",
   },
   {
     name: "Akshita Goswami",
@@ -431,48 +429,56 @@ export const results: ResultCard[] = [
     result: "Rank 1",
     note: "Annual examination 2026",
     initials: "AG",
+    image: "/assets/students/akshita-goswami.webp",
   },
   {
     name: "Yashvardan Rajput",
     className: "Class 2",
     result: "Rank 2",
     initials: "YR",
+    image: "/assets/students/yashvardan-rajput.webp",
   },
   {
     name: "Yash Maheswari",
     className: "Class 3",
     result: "91%",
     initials: "YM",
+    image: "/assets/students/yash-maheswari.webp",
   },
   {
     name: "Varsha Goswami",
     className: "Class 8 \u00b7 MP Board",
     result: "88%",
     initials: "VG",
+    image: "/assets/students/varsha-goswami.webp",
   },
   {
     name: "Ayushi Goswami",
     className: "Class 5",
     result: "88%",
     initials: "AG",
+    image: "/assets/students/ayushi-goswami.webp",
   },
   {
     name: "Apeksha Pandey",
     className: "Class 5",
     result: "83%",
     initials: "AP",
+    image: "/assets/students/apeksha-pandey.webp",
   },
   {
     name: "Bhavesh Sarthe",
     className: "Class 4",
     result: "82%",
     initials: "BS",
+    image: "/assets/students/bhavesh-sarthe.webp",
   },
   {
     name: "Vihaan Rajput",
     className: "Class 4",
     result: "78%",
     initials: "VR",
+    image: "/assets/students/vihaan-rajput.webp",
   },
 
   // Internal Navodaya mock, kept from the whiteboard photo.
