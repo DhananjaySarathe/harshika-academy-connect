@@ -460,6 +460,13 @@ export const results: ResultCard[] = [
     image: "/assets/students/ayushi-goswami.webp",
   },
   {
+    name: "Sidhhi Thakur",
+    className: "Class 5",
+    result: "84%",
+    initials: "ST",
+    image: "/assets/students/sidhhi-thakur.webp",
+  },
+  {
     name: "Apeksha Pandey",
     className: "Class 5",
     result: "83%",
@@ -472,6 +479,20 @@ export const results: ResultCard[] = [
     result: "82%",
     initials: "BS",
     image: "/assets/students/bhavesh-sarthe.webp",
+  },
+  {
+    name: "Shivansh Thakur",
+    className: "Class 2",
+    result: "81%",
+    initials: "ST",
+    image: "/assets/students/shivansh-thakur.webp",
+  },
+  {
+    name: "Ayushi Chouhan",
+    className: "Class 2",
+    result: "79%",
+    initials: "AC",
+    image: "/assets/students/ayushi-chouhan.webp",
   },
   {
     name: "Vihaan Rajput",
