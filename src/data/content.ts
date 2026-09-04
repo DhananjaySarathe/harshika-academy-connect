@@ -325,52 +325,37 @@ export type ResultCard = {
   name: string;
   className: string;
   result: string;
-  school: string;
+  /** Context line under the score, e.g. which test it was. */
+  note: string;
   initials: string;
 };
 
+/**
+ * Real students, real marks, taken from the Navodaya Test 1 board.
+ * Only the top scores are listed — publishing a child's low mark on a public
+ * page is not something the academy needs to do.
+ */
 export const results: ResultCard[] = [
   {
-    name: "Aarav Sharma",
-    initials: "AS",
-    className: "Class 10 · CBSE",
-    result: "92% in Mathematics",
-    school: "St. Joseph's School",
+    name: "Harsita Panwar",
+    className: "Navodaya Batch",
+    result: "85",
+    note: "Navodaya Test 1",
+    initials: "HP",
   },
   {
-    name: "Ananya Patel",
+    name: "Apechha Pandey",
+    className: "Navodaya Batch",
+    result: "67.5",
+    note: "Navodaya Test 1",
     initials: "AP",
-    className: "Class 9",
-    result: "91% overall",
-    school: "Delhi Public School",
   },
   {
-    name: "Rohan Verma",
-    initials: "RV",
-    className: "Class 8",
-    result: "From 58% to 81%",
-    school: "Kendriya Vidyalaya",
-  },
-  {
-    name: "Meera Joshi",
-    initials: "MJ",
-    className: "Class 10 · MP Board",
-    result: "94% in Science",
-    school: "Christ Church School",
-  },
-  {
-    name: "Kabir Khan",
-    initials: "KK",
-    className: "Class 9",
-    result: "Best improvement award",
-    school: "St. Aloysius School",
-  },
-  {
-    name: "Ishita Singh",
-    initials: "IS",
-    className: "Class 7",
-    result: "89% in Mathematics",
-    school: "M.G.M. School",
+    name: "Paridhi Sahu",
+    className: "Navodaya Batch",
+    result: "65",
+    note: "Navodaya Test 1",
+    initials: "PS",
   },
 ];
 
@@ -462,6 +447,36 @@ export const galleryItems: GalleryItem[] = [
     caption: "The senior batch outside the academy",
     category: "Events",
     ratio: "wide",
+  },
+  {
+    src: "/assets/one-to-one-help.webp",
+    caption: "One-to-one, when a topic needs it",
+    category: "Classroom",
+    ratio: "wide",
+  },
+  {
+    src: "/assets/test-day.webp",
+    caption: "A weekly test in progress",
+    category: "Classroom",
+    ratio: "wide",
+  },
+  {
+    src: "/assets/navodaya-results.webp",
+    caption: "Navodaya Test 1 results, up on the board",
+    category: "Achievements",
+    ratio: "wide",
+  },
+  {
+    src: "/assets/navodaya-alumna.webp",
+    caption: "Soniya Sahu, Navodaya batch of 2023, back for a session",
+    category: "Achievements",
+    ratio: "wide",
+  },
+  {
+    src: "/assets/whole-academy.webp",
+    caption: "The whole academy, one afternoon",
+    category: "Events",
+    ratio: "square",
   },
 ];
 
