@@ -12,12 +12,14 @@ import { Reveal, SectionHeading } from "./shared";
  * Two behaviours from one markup, chosen by CSS (see `.results-rail` in
  * styles.css):
  *
- * - Rail mode — lg and up, motion allowed, `animation-timeline` supported.
- *   The section grows tall, the heading and track pin, and the page's
- *   vertical scroll drives the track sideways. A gold progress line runs the
- *   same timeline. Arrows hide; the page IS the scroller.
- * - Fallback — everything else. The original horizontal rail: native
- *   overflow, snap points, arrows on sm+, mouse drag on desktop.
+ * - Rail mode — motion allowed and `animation-timeline` supported, on every
+ *   viewport. The section grows tall, the heading and track pin, and the
+ *   page's vertical scroll drives the track sideways — on a phone that means
+ *   a vertical swipe moves the row. A gold progress line runs the same
+ *   timeline. Arrows and the swipe hint hide; the page IS the scroller.
+ * - Fallback — reduced motion, or no scroll-driven animation (Firefox). The
+ *   original horizontal rail: native overflow, snap points, arrows on sm+,
+ *   mouse drag on desktop.
  *
  * Nothing here branches on which mode is active except the focus handler,
  * which has to know whether a card can be scrolled into view natively.
@@ -193,7 +195,9 @@ export function Results() {
           </div>
 
           <Reveal>
-            <p className="mt-2 text-xs text-body sm:hidden">Swipe to see more students.</p>
+            <p className="results-hint mt-2 text-xs text-body sm:hidden">
+              Swipe to see more students.
+            </p>
           </Reveal>
         </div>
       </div>

@@ -340,10 +340,10 @@ html.lenis {
 
 /* --- Results rail: the page's vertical scroll drives the cards sideways --- */
 
-/* Only where the browser can drive animation from scroll, the viewport is wide
-   enough for a row to mean something, and the visitor has not asked for less
-   motion. Everywhere else the markup is a plain horizontal scroller. */
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+/* Wherever the browser can drive animation from scroll and the visitor has
+   not asked for less motion — phones included; a vertical swipe moves the row.
+   Everywhere else the markup is a plain horizontal scroller. */
+@media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
     .results-rail {
       view-timeline-name: --rail;
@@ -376,7 +376,8 @@ html.lenis {
       animation-timeline: --rail;
       animation-range: contain 0% contain 100%;
     }
-    .results-arrows {
+    .results-arrows,
+    .results-hint {
       display: none;
     }
     .results-progress {

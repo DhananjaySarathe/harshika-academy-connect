@@ -55,10 +55,10 @@ export function CourseStack() {
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                   {/* Scrim: on phones the photo fades down into the copy; on desktop only
-                      the last ~14% blends into the panel, so faces near the edge survive. */}
+                      the last 10% blends into the panel, so a face near the edge stays lit. */}
                   <div
                     aria-hidden="true"
-                    className="absolute inset-0 bg-gradient-to-t from-panel via-panel/20 to-transparent lg:[background:linear-gradient(to_right,transparent_84%,var(--panel))]"
+                    className="absolute inset-0 bg-gradient-to-t from-panel via-panel/20 to-transparent lg:[background:linear-gradient(to_right,transparent_90%,var(--panel))]"
                   />
                   <span
                     aria-hidden="true"
