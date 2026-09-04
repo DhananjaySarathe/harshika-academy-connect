@@ -75,7 +75,10 @@ export function Hero() {
           </Reveal>
         </div>
 
-        <Reveal delay={200} className="order-5 relative mx-auto mt-10 w-full max-w-[520px] lg:mt-0">
+        <Reveal
+          delay={200}
+          className="hero-drift order-5 relative mx-auto mt-10 w-full max-w-[520px] lg:mt-0"
+        >
           <div aria-hidden="true" className="absolute -inset-10 rounded-full bg-gold/5 blur-3xl" />
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-gold/20 bg-panel">
             <img

@@ -1,9 +1,13 @@
+import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
+import "lenis/dist/lenis.css";
+
+import { startSmoothScroll } from "@/lib/smooth-scroll";
 import { About } from "@/components/academy/About";
 import { Admission } from "@/components/academy/Admission";
 import { Contact } from "@/components/academy/Contact";
-import { Courses } from "@/components/academy/Courses";
+import { CourseStack } from "@/components/academy/CourseStack";
 import { Faculty } from "@/components/academy/Faculty";
 import { Faq } from "@/components/academy/Faq";
 import { FinalCta } from "@/components/academy/FinalCta";
@@ -109,6 +113,9 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
+  // Smooth scrolling is a client concern; it returns its own teardown.
+  useEffect(() => startSmoothScroll(), []);
+
   return (
     <>
       <ScrollProgress />
@@ -118,7 +125,7 @@ function HomePage() {
         <Hero />
         <TrustStrip />
         <About />
-        <Courses />
+        <CourseStack />
         <Faculty />
         <Admission />
         <Results />

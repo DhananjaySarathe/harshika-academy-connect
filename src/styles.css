@@ -72,6 +72,8 @@
   --input: oklch(0.76 0.16 82 / 25%);
   --ring: oklch(0.86 0.13 86);
   color-scheme: dark;
+  /* Clearance under the fixed header for pinned stack cards. */
+  --stack-top: 88px;
   --page: #0b0e14;
   --panel: #141926;
   --heading: #ffffff;
@@ -256,6 +258,86 @@ html {
   filter: invert(0.92) hue-rotate(180deg) brightness(0.95) contrast(0.9) saturate(0.6);
 }
 
+/* --- Scroll motion ------------------------------------------------------- */
+
+/* Lenis drives window.scrollTo every frame. If the browser also eases each of
+   those, the two fight. Keyed on the class Lenis always adds, not the
+   conditional `lenis-smooth` one. */
+html.lenis {
+  scroll-behavior: auto !important;
+}
+
+/* A section that stays on ink in both themes. Redeclares the semantic tokens so
+   every `text-heading` / `bg-panel` / `text-gold` inside resolves to the dark
+   palette without touching the rest of the page. */
+@utility ink-band {
+  --page: #0b0e14;
+  --panel: #141926;
+  --heading: #ffffff;
+  --body: #b9bfcc;
+  --on-gold: #0b0e14;
+  --gold: #e3b23c;
+  --gold-bright: #f7dc8a;
+  --gold-deep: #a97c1e;
+  --gold-fill: #e3b23c;
+  --gold-fill-strong: #f7dc8a;
+  --foil-a: #a97c1e;
+  --foil-b: #f7dc8a;
+  --foil-c: #e3b23c;
+  --shadow-tint: rgb(0 0 0 / 55%);
+  color-scheme: dark;
+  background-color: var(--page);
+  color: var(--body);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --stack-top: 100px;
+  }
+}
+
+/* Where the browser can drive animation from scroll position, reveals stop
+   being a JS-toggled transition and become scroll-linked: each element fades
+   and rises as it enters the viewport, on the compositor, with no listener.
+   Browsers without support keep the transition + ticker path above. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    transition: none;
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 45%;
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Hero portrait eases up and back as the page scrolls away from it. */
+  .hero-drift {
+    animation: hero-drift linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0px 80vh;
+  }
+
+  @keyframes hero-drift {
+    from {
+      opacity: 1;
+      transform: none;
+    }
+    to {
+      opacity: 0.55;
+      transform: translateY(-48px) scale(1.04);
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -271,7 +353,9 @@ html {
   }
 
   /* Reveals must still end up visible — never leave content at opacity 0. */
-  .reveal {
+  .reveal,
+  .hero-drift {
+    animation: none !important;
     opacity: 1;
     transform: none;
   }

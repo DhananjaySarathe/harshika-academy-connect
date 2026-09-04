@@ -13,6 +13,12 @@ export const phoneHref = `tel:${phoneE164}`;
 export const whatsappUrl =
   "https://wa.me/919171164151?text=Hi%2C%20I%20want%20to%20know%20about%20admission%20at%20Harshika%20Academy";
 
+/** A WhatsApp link whose opening message names the batch being asked about. */
+export function whatsappFor(topic: string) {
+  const text = `Hi, I want to ask about the ${topic} batch at Harshika Academy`;
+  return `https://wa.me/919171164151?text=${encodeURIComponent(text)}`;
+}
+
 export type SocialLink = { label: string; href: string };
 
 export const academy = {
@@ -161,12 +167,24 @@ export type Subject = {
   timing: "Morning" | "Evening";
 };
 
-export type CourseTab = { id: string; label: string; subjects: Subject[] };
+export type CourseTab = {
+  id: string;
+  label: string;
+  /** One line under the label on the course card. */
+  tagline: string;
+  /** A real photograph from that batch; the card is built around it. */
+  image: string;
+  alt: string;
+  subjects: Subject[];
+};
 
 export const courseTabs: CourseTab[] = [
   {
     id: "nursery-class-5",
     label: "Nursery – Class 5",
+    tagline: "Foundations, at the child's own pace.",
+    image: "/assets/one-to-one-help.webp",
+    alt: "Mohit Sarathe working one-to-one with a young student at a desk",
     subjects: [
       {
         name: "Reading & Writing",
@@ -191,6 +209,9 @@ export const courseTabs: CourseTab[] = [
   {
     id: "class-6-8",
     label: "Class 6 – Class 8",
+    tagline: "Where the concepts start to connect.",
+    image: "/assets/classroom-wide.webp",
+    alt: "A middle-school batch seated at low desks during a lesson",
     subjects: [
       {
         name: "Mathematics",
@@ -221,6 +242,9 @@ export const courseTabs: CourseTab[] = [
   {
     id: "class-9-10",
     label: "Class 9 – Class 10",
+    tagline: "Board-ready, one week at a time.",
+    image: "/assets/test-day.webp",
+    alt: "Students writing a weekly test on the classroom floor mats",
     subjects: [
       {
         name: "Mathematics",
@@ -251,6 +275,9 @@ export const courseTabs: CourseTab[] = [
   {
     id: "navodaya",
     label: "Navodaya Prep",
+    tagline: "The entrance, prepared for properly.",
+    image: "/assets/navodaya-results.webp",
+    alt: "Navodaya Test 1 results on the whiteboard, with students holding their answer sheets",
     subjects: [
       {
         name: "Mental Ability",

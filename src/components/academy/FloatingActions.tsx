@@ -4,6 +4,7 @@ import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { whatsappUrl } from "@/data/content";
 import { onViewportChange, useReducedMotion } from "@/hooks/use-motion";
+import { scrollWindowTo } from "@/lib/smooth-scroll";
 
 /**
  * The always-on pair, bottom-right: the WhatsApp chat button and back-to-top.
@@ -28,7 +29,7 @@ export function FloatingActions() {
     [],
   );
 
-  const toTop = () => window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
+  const toTop = () => scrollWindowTo(0, reducedMotion);
 
   return (
     <div
