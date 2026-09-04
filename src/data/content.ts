@@ -2,7 +2,7 @@
 // Harshika Academy — all editable site content lives here.
 //
 // This is the only file the academy needs to edit for day-to-day changes:
-// phone numbers, stats, courses, results, gallery photos, testimonials, FAQs.
+// phone numbers, stats, courses, results, gallery photos and FAQs.
 // The section components read from here and never hardcode copy.
 // -----------------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ export const academy = {
   phone: phoneDisplay,
   phoneE164,
   phoneHref,
-  email: "academy@harshikaacademy.in",
+  email: "harshikaacademy@gmail.com",
   addressLine: "Neelkanth Road, Ward No. 10",
   /** Locals navigate by the college, not the road name. */
   landmark: "Near SVN Govt. College",
@@ -34,10 +34,13 @@ export const academy = {
   country: "IN",
   timings: "Monday – Saturday · 8:00 AM – 7:00 PM",
   openingHours: "Mo-Sa 08:00-19:00",
+  /**
+   * Real profiles only — these feed the footer, the contact block and the
+   * `sameAs` array in the JSON-LD, where a placeholder link is worse than
+   * no link at all. Add Instagram and Facebook here once the handles exist.
+   */
   social: [
-    { label: "Instagram", href: "https://www.instagram.com/" },
-    { label: "Facebook", href: "https://www.facebook.com/" },
-    { label: "YouTube", href: "https://www.youtube.com/" },
+    { label: "YouTube", href: "https://www.youtube.com/@studywithharshi" },
   ] satisfies SocialLink[],
 };
 
@@ -101,7 +104,7 @@ export const stats: Stat[] = [
   { value: 1000, suffix: "+", label: "Students Taught" },
   { value: 6, suffix: "", label: "Years of Teaching" },
   { value: 0, suffix: "", label: "CTET Qualified Faculty", display: "CTET" },
-  { value: 95, suffix: "%", label: "Average Score Improvement" },
+  { value: 0, suffix: "", label: "Classes Covered", display: "Nur–10" },
 ];
 
 // -- About --------------------------------------------------------------------
@@ -111,7 +114,7 @@ export type Pillar = { icon: PillarIcon; title: string; text: string };
 
 export const about = {
   paragraphs: [
-    "Harshika Academy started in a single room with six students and one rule: nobody leaves a class still confused. Mohit Sarathe had spent years watching bright children fall behind not because they could not learn, but because nobody slowed down for their question.",
+    "Harshika Academy teaches every class from Nursery to Class 10, across CBSE and MP Board, with a dedicated batch for children preparing for the Navodaya entrance. Classes are taken by Mohit Sarathe, who is CTET qualified.",
     "We believe a strong foundation matters more than a good report card. A student who understands why a method works will handle a question they have never seen before. A student who only memorised the steps will not.",
     "So we keep batches small, teach every topic from the basics up, and tell parents the truth about where their child stands — every week, not just before the exams.",
   ],
@@ -322,52 +325,37 @@ export type ResultCard = {
   name: string;
   className: string;
   result: string;
-  school: string;
+  /** Context line under the score, e.g. which test it was. */
+  note: string;
   initials: string;
 };
 
+/**
+ * Real students, real marks, taken from the Navodaya Test 1 board.
+ * Only the top scores are listed — publishing a child's low mark on a public
+ * page is not something the academy needs to do.
+ */
 export const results: ResultCard[] = [
   {
-    name: "Aarav Sharma",
-    initials: "AS",
-    className: "Class 10 · CBSE",
-    result: "92% in Mathematics",
-    school: "St. Joseph's School",
+    name: "Harsita Panwar",
+    className: "Navodaya Batch",
+    result: "85",
+    note: "Navodaya Test 1",
+    initials: "HP",
   },
   {
-    name: "Ananya Patel",
+    name: "Apechha Pandey",
+    className: "Navodaya Batch",
+    result: "67.5",
+    note: "Navodaya Test 1",
     initials: "AP",
-    className: "Class 9",
-    result: "91% overall",
-    school: "Delhi Public School",
   },
   {
-    name: "Rohan Verma",
-    initials: "RV",
-    className: "Class 8",
-    result: "From 58% to 81%",
-    school: "Kendriya Vidyalaya",
-  },
-  {
-    name: "Meera Joshi",
-    initials: "MJ",
-    className: "Class 10 · MP Board",
-    result: "94% in Science",
-    school: "Christ Church School",
-  },
-  {
-    name: "Kabir Khan",
-    initials: "KK",
-    className: "Class 9",
-    result: "Best improvement award",
-    school: "St. Aloysius School",
-  },
-  {
-    name: "Ishita Singh",
-    initials: "IS",
-    className: "Class 7",
-    result: "89% in Mathematics",
-    school: "M.G.M. School",
+    name: "Paridhi Sahu",
+    className: "Navodaya Batch",
+    result: "65",
+    note: "Navodaya Test 1",
+    initials: "PS",
   },
 ];
 
@@ -460,52 +448,35 @@ export const galleryItems: GalleryItem[] = [
     category: "Events",
     ratio: "wide",
   },
-];
-
-// -- Testimonials -------------------------------------------------------------
-
-export type Testimonial = {
-  quote: string;
-  name: string;
-  relation: string;
-  initials: string;
-};
-
-export const testimonials: Testimonial[] = [
   {
-    quote:
-      "My daughter used to keep quiet when she did not understand. Here she asks questions freely. Her weekly test scores have become steady.",
-    name: "Sunita Sharma",
-    relation: "Parent of Class 9 student",
-    initials: "SS",
+    src: "/assets/one-to-one-help.webp",
+    caption: "One-to-one, when a topic needs it",
+    category: "Classroom",
+    ratio: "wide",
   },
   {
-    quote:
-      "Mohit Sir explains one idea in more than one way. That helped me understand algebra instead of just copying the steps.",
-    name: "Rohan Verma",
-    relation: "Class 8 student",
-    initials: "RV",
+    src: "/assets/test-day.webp",
+    caption: "A weekly test in progress",
+    category: "Classroom",
+    ratio: "wide",
   },
   {
-    quote:
-      "We receive clear feedback, not only marks. It is helpful to know what to practise at home each week.",
-    name: "Amit Patel",
-    relation: "Parent of Class 10 student",
-    initials: "AP",
+    src: "/assets/navodaya-results.webp",
+    caption: "Navodaya Test 1 results, up on the board",
+    category: "Achievements",
+    ratio: "wide",
   },
   {
-    quote:
-      "The batch is small and the classes are calm. I started preparing before exams instead of waiting for the last month.",
-    name: "Ananya Joshi",
-    relation: "Class 10 student",
-    initials: "AJ",
+    src: "/assets/navodaya-alumna.webp",
+    caption: "Soniya Sahu, Navodaya batch of 2023, back for a session",
+    category: "Achievements",
+    ratio: "wide",
   },
   {
-    quote:
-      "The academy gives equal attention to basics and test practice. We saw a real improvement in confidence first, then in marks.",
-    name: "Farah Khan",
-    relation: "Parent of Class 8 student",
-    initials: "FK",
+    src: "/assets/whole-academy.webp",
+    caption: "The whole academy, one afternoon",
+    category: "Events",
+    ratio: "square",
   },
 ];
 

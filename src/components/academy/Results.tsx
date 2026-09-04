@@ -129,7 +129,7 @@ export function Results() {
                 <p className="mt-3 font-display text-2xl uppercase leading-tight text-gold">
                   {item.result}
                 </p>
-                <p className="mt-2 text-xs text-body">{item.school}</p>
+                <p className="mt-2 text-xs text-body">{item.note}</p>
               </div>
             </article>
           ))}

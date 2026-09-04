@@ -14,7 +14,6 @@ import { Header } from "@/components/academy/Header";
 import { Hero } from "@/components/academy/Hero";
 import { Results } from "@/components/academy/Results";
 import { ScrollProgress } from "@/components/academy/ScrollProgress";
-import { Testimonials } from "@/components/academy/Testimonials";
 import { TrustStrip } from "@/components/academy/TrustStrip";
 import { academy, faqs, geo, mapDirectionsUrl, seo } from "@/data/content";
 
@@ -124,7 +123,6 @@ function HomePage() {
         <Admission />
         <Results />
         <Gallery />
-        <Testimonials />
         <Faq />
         <Contact />
         <FinalCta />
