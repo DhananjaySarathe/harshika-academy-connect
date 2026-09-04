@@ -65,6 +65,22 @@ Three layers, in order of how much they matter:
 `ink-band` scopes the dark palette to one section regardless of theme; the
 course stack uses it so the deck sits on ink in light mode too.
 
+Two more scroll-linked pieces, both pure CSS on named view timelines:
+
+- **Results rail** (`Results.tsx`, `.results-*`): on lg, with motion allowed
+  and `animation-timeline` supported, the section grows to `100svh + 300px ×
+cards`, the heading and track pin, and vertical scroll slides the track
+  sideways with a gold progress line. Everywhere else it is the plain
+  horizontal swipe rail. Keyboard: the track's focus handler moves the page so
+  a focused card lands on screen, since a transform cannot be scrolled into
+  view natively. Cards flagged `placeholder: true` are design filler and wear
+  a "sample" badge in dev — none may reach `main`.
+- **About** (`About.tsx`, `.about-*`): the photo column pins on lg; the two
+  photos and the ghosted word drift in opposite directions on the section's
+  timeline so they read as separate layers. The pillars live in the copy
+  column on purpose — that column has to be taller than the photos or there
+  is no runway for the pin.
+
 ## House rules
 
 - **No fees, prices or payment information anywhere on the page.** Batch timings

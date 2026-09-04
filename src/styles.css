@@ -338,6 +338,127 @@ html.lenis {
   }
 }
 
+/* --- Results rail: the page's vertical scroll drives the cards sideways --- */
+
+/* Only where the browser can drive animation from scroll, the viewport is wide
+   enough for a row to mean something, and the visitor has not asked for less
+   motion. Everywhere else the markup is a plain horizontal scroller. */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .results-rail {
+      view-timeline-name: --rail;
+      view-timeline-axis: block;
+      /* One viewport to pin, then ~300px of runway per card. */
+      min-height: calc(100svh + var(--rail-cards, 12) * 300px);
+      padding-block: 0;
+      /* Where the content column starts, so the track lines up with it. */
+      --rail-pad: max(1.5rem, calc((100vw - 1200px) / 2 + 1.5rem));
+    }
+    .results-pin {
+      position: sticky;
+      top: 0;
+      display: flex;
+      height: 100svh;
+      flex-direction: column;
+      justify-content: center;
+      overflow-x: clip;
+    }
+    .results-inner {
+      max-width: none;
+      padding-inline: var(--rail-pad);
+    }
+    .results-track {
+      width: max-content;
+      overflow: visible;
+      scroll-snap-type: none;
+      cursor: default;
+      animation: rail-slide linear both;
+      animation-timeline: --rail;
+      animation-range: contain 0% contain 100%;
+    }
+    .results-arrows {
+      display: none;
+    }
+    .results-progress {
+      display: block;
+    }
+    .results-progress > span {
+      animation: rail-progress linear both;
+      animation-timeline: --rail;
+      animation-range: contain 0% contain 100%;
+    }
+  }
+}
+
+@keyframes rail-slide {
+  to {
+    /* -100% is the track's own width; end with its right edge at the pad. */
+    transform: translateX(calc(-100% + 100vw - 2 * var(--rail-pad, 1.5rem)));
+  }
+}
+
+@keyframes rail-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* --- About: two pinned photos drift against each other as the copy scrolls */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .about-section {
+      view-timeline-name: --about;
+      view-timeline-axis: block;
+    }
+    .about-photo-a,
+    .about-photo-b,
+    .about-ghost {
+      animation: linear both;
+      animation-timeline: --about;
+      animation-range: contain 0% contain 100%;
+    }
+    .about-photo-a {
+      animation-name: about-a;
+    }
+    .about-photo-b {
+      animation-name: about-b;
+    }
+    .about-ghost {
+      animation-name: about-ghost;
+    }
+  }
+}
+
+@keyframes about-a {
+  from {
+    transform: translateY(28px);
+  }
+  to {
+    transform: translateY(-28px);
+  }
+}
+
+@keyframes about-b {
+  from {
+    transform: translateY(-22px);
+  }
+  to {
+    transform: translateY(30px);
+  }
+}
+
+@keyframes about-ghost {
+  from {
+    transform: translateX(5vw);
+  }
+  to {
+    transform: translateX(-7vw);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -354,7 +475,12 @@ html.lenis {
 
   /* Reveals must still end up visible — never leave content at opacity 0. */
   .reveal,
-  .hero-drift {
+  .hero-drift,
+  .results-track,
+  .results-progress > span,
+  .about-photo-a,
+  .about-photo-b,
+  .about-ghost {
     animation: none !important;
     opacity: 1;
     transform: none;

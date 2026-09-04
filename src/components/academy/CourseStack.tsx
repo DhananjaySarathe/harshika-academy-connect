@@ -43,7 +43,7 @@ export function CourseStack() {
               className="stack-card sticky mb-5 overflow-hidden rounded-[1.75rem] border border-gold/20 bg-panel elevate-lg last:mb-0 sm:mb-6"
               style={{ top: `calc(var(--stack-top) + ${index * 18}px)` }}
             >
-              <div className="grid lg:min-h-[68vh] lg:grid-cols-[1.05fr_1fr]">
+              <div className="grid lg:min-h-[68vh] lg:grid-cols-[1.45fr_1fr]">
                 {/* Photograph side */}
                 <div className="relative min-h-[200px] sm:min-h-[300px] lg:min-h-0">
                   <img
@@ -51,12 +51,14 @@ export function CourseStack() {
                     alt={tab.alt}
                     loading={index === 0 ? "eager" : "lazy"}
                     decoding="async"
+                    style={tab.focal ? { objectPosition: tab.focal } : undefined}
                     className="absolute inset-0 h-full w-full object-cover"
                   />
-                  {/* Scrim: fades the photo into the panel so the card reads as one object. */}
+                  {/* Scrim: on phones the photo fades down into the copy; on desktop only
+                      the last ~14% blends into the panel, so faces near the edge survive. */}
                   <div
                     aria-hidden="true"
-                    className="absolute inset-0 bg-gradient-to-t from-panel via-panel/20 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-panel"
+                    className="absolute inset-0 bg-gradient-to-t from-panel via-panel/20 to-transparent lg:[background:linear-gradient(to_right,transparent_84%,var(--panel))]"
                   />
                   <span
                     aria-hidden="true"
