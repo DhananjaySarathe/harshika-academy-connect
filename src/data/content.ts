@@ -19,6 +19,45 @@ export function whatsappFor(topic: string) {
   return `https://wa.me/919171164151?text=${encodeURIComponent(text)}`;
 }
 
+/** wa.me wants the number without the leading plus. */
+const waNumber = phoneE164.slice(1);
+
+export type EnquiryFields = {
+  studentName: string;
+  parentName: string;
+  phone: string;
+  studentClass: string;
+  subjects: string;
+  message: string;
+};
+
+/**
+ * The enquiry form has no backend, so the enquiry travels as a message the
+ * parent sends themselves — from their own number, which means the academy can
+ * reply in the same thread instead of copying a number out of an email.
+ *
+ * Both links carry the identical body. Optional lines are dropped when blank so
+ * the academy never receives an empty "Subjects:".
+ */
+export function enquiryLinks(fields: EnquiryFields) {
+  const lines = [
+    `Student: ${fields.studentName.trim()}`,
+    `Parent: ${fields.parentName.trim()}`,
+    `Phone: ${fields.phone.trim()}`,
+    `Class: ${fields.studentClass}`,
+  ];
+  if (fields.subjects.trim()) lines.push(`Subjects: ${fields.subjects.trim()}`);
+  if (fields.message.trim()) lines.push(`Message: ${fields.message.trim()}`);
+
+  const body = `Hi ${academy.name}, I would like to enquire about admission.\n\n${lines.join("\n")}`;
+  const subject = `Admission enquiry - ${fields.studentName.trim()}`;
+
+  return {
+    whatsapp: `https://wa.me/${waNumber}?text=${encodeURIComponent(body)}`,
+    mailto: `mailto:${academy.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+  };
+}
+
 export type SocialLink = { label: string; href: string };
 
 export const academy = {
