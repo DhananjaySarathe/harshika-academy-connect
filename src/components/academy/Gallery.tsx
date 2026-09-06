@@ -15,6 +15,9 @@ const ratioClass: Record<GalleryRatio, string> = {
   tall: "aspect-[3/4]",
   square: "aspect-square",
   wide: "aspect-[4/3]",
+  // Phone camera 16:9. Its own box, so a room full of children keeps both its
+  // edges instead of being cropped into the 4:3 one.
+  pano: "aspect-[16/9]",
 };
 
 export function Gallery() {

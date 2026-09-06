@@ -570,7 +570,7 @@ export const galleryCategories = ["All", "Classroom", "Events", "Achievements"] 
 export type GalleryCategory = (typeof galleryCategories)[number];
 
 /** Ratios keep the masonry varied and reserve space so images don't shift the page. */
-export type GalleryRatio = "tall" | "square" | "wide";
+export type GalleryRatio = "tall" | "square" | "wide" | "pano";
 
 export type GalleryItem = {
   src: string;
@@ -587,10 +587,22 @@ export const galleryItems: GalleryItem[] = [
     ratio: "wide",
   },
   {
+    src: "/assets/class-with-teacher.webp",
+    caption: "A class in session with Mohit Sarathe",
+    category: "Classroom",
+    ratio: "pano",
+  },
+  {
     src: "/assets/trophy-winners-banner.webp",
     caption: "Prize day under the academy banner",
     category: "Achievements",
     ratio: "tall",
+  },
+  {
+    src: "/assets/batch-at-work.webp",
+    caption: "Heads down, mid-practice",
+    category: "Classroom",
+    ratio: "pano",
   },
   {
     src: "/assets/report-cards.webp",
@@ -617,10 +629,28 @@ export const galleryItems: GalleryItem[] = [
     ratio: "tall",
   },
   {
+    src: "/assets/hall-and-courtyard.webp",
+    caption: "The hall, open to the courtyard",
+    category: "Classroom",
+    ratio: "pano",
+  },
+  {
     src: "/assets/students-peace.webp",
     caption: "After class, on the way home",
     category: "Classroom",
     ratio: "wide",
+  },
+  {
+    src: "/assets/birthday-portrait-a.webp",
+    caption: "At the birthday celebration",
+    category: "Events",
+    ratio: "square",
+  },
+  {
+    src: "/assets/birthday-portrait-b.webp",
+    caption: "Dressed up for the birthday",
+    category: "Events",
+    ratio: "square",
   },
   {
     src: "/assets/trophy-winners.webp",
