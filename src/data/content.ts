@@ -281,7 +281,7 @@ export const courseTabs: CourseTab[] = [
   {
     id: "class-9-10",
     label: "Class 9 – Class 10",
-    tagline: "Board-ready, one week at a time.",
+    tagline: "From Classroom to Boardroom Success",
     image: "/assets/test-day.webp",
     alt: "Students writing a weekly test on the classroom floor mats",
     subjects: [
@@ -346,6 +346,16 @@ export type Teacher = {
   /** Written in the teacher's own voice. */
   note: string;
   quote: string;
+  /**
+   * The teacher's own formula, one term at a time. Each term carries both
+   * languages so the Hindi can sit directly under its English counterpart —
+   * a parent reading either one gets the whole equation.
+   */
+  formula?: {
+    label: string;
+    terms: { en: string; hi: string }[];
+    result: { en: string; hi: string };
+  };
 };
 
 export const faculty: Teacher[] = [
@@ -358,6 +368,15 @@ export const faculty: Teacher[] = [
     badges: ["CTET Qualified", "MPPSC Pre Qualified"],
     note: "I teach the way I wish I had been taught. One idea at a time, with an example from something the student already knows — a cricket score, a shop bill, a bus timing. If a child cannot explain it back to me in their own words, we have not finished the topic. I would rather cover less and have it stay.",
     quote: "A student who understands the 'why' never forgets the 'what'.",
+    formula: {
+      label: "His formula for teaching",
+      terms: [
+        { en: "Goal", hi: "लक्ष्य" },
+        { en: "Focus", hi: "एकाग्रता" },
+        { en: "Hard Work", hi: "मेहनत" },
+      ],
+      result: { en: "Success", hi: "सफलता" },
+    },
   },
 ];
 
@@ -570,7 +589,7 @@ export const galleryCategories = ["All", "Classroom", "Events", "Achievements"] 
 export type GalleryCategory = (typeof galleryCategories)[number];
 
 /** Ratios keep the masonry varied and reserve space so images don't shift the page. */
-export type GalleryRatio = "tall" | "square" | "wide";
+export type GalleryRatio = "tall" | "square" | "wide" | "pano";
 
 export type GalleryItem = {
   src: string;
@@ -587,10 +606,22 @@ export const galleryItems: GalleryItem[] = [
     ratio: "wide",
   },
   {
+    src: "/assets/class-with-teacher.webp",
+    caption: "A class in session with Mohit Sarathe",
+    category: "Classroom",
+    ratio: "pano",
+  },
+  {
     src: "/assets/trophy-winners-banner.webp",
     caption: "Prize day under the academy banner",
     category: "Achievements",
     ratio: "tall",
+  },
+  {
+    src: "/assets/batch-at-work.webp",
+    caption: "Heads down, mid-practice",
+    category: "Classroom",
+    ratio: "pano",
   },
   {
     src: "/assets/report-cards.webp",
@@ -617,10 +648,28 @@ export const galleryItems: GalleryItem[] = [
     ratio: "tall",
   },
   {
+    src: "/assets/hall-and-courtyard.webp",
+    caption: "The hall, open to the courtyard",
+    category: "Classroom",
+    ratio: "pano",
+  },
+  {
     src: "/assets/students-peace.webp",
     caption: "After class, on the way home",
     category: "Classroom",
     ratio: "wide",
+  },
+  {
+    src: "/assets/birthday-portrait-a.webp",
+    caption: "At the birthday celebration",
+    category: "Events",
+    ratio: "square",
+  },
+  {
+    src: "/assets/birthday-portrait-b.webp",
+    caption: "Dressed up for the birthday",
+    category: "Events",
+    ratio: "square",
   },
   {
     src: "/assets/trophy-winners.webp",
