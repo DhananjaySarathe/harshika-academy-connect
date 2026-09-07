@@ -47,6 +47,10 @@
   --font-body:
     "Plus Jakarta Sans", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-utility: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* Anton, Inter and Plus Jakarta Sans carry no Devanagari, so Hindi would fall
+     back to whatever each device happens to have. */
+  --font-devanagari:
+    "Noto Sans Devanagari", "Kohinoor Devanagari", "Nirmala UI", "Mangal", sans-serif;
   --color-danger: var(--danger);
   /* Two extra grounds so the page has tonal rhythm instead of one dark island:
      sand is a warm lift for the results chapter, dusk the approach tone that

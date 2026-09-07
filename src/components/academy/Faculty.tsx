@@ -1,5 +1,7 @@
-import { GraduationCap } from "lucide-react";
+import { Fragment } from "react";
+import { GraduationCap, Target } from "lucide-react";
 
+import { cn } from "@/lib/utils";
 import { faculty, type Teacher } from "@/data/content";
 import { GoldArc, Reveal, SectionHeading } from "./shared";
 
@@ -92,12 +94,82 @@ function TeacherCard({ teacher, showHeading }: { teacher: Teacher; showHeading: 
           <p className="mt-7 max-w-2xl text-base leading-[1.65] text-body">{teacher.note}</p>
         </Reveal>
 
-        <Reveal delay={360}>
+        {teacher.formula ? (
+          <Reveal delay={360}>
+            <div className="gold-border-glow relative mt-8 overflow-hidden rounded-2xl border border-gold/40 bg-gold/[0.07] p-5 elevate-lg sm:p-6">
+              {/* A gold wash so the block reads as the highlight of the section
+                  rather than one more panel. */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_12%_0%,rgba(227,178,60,0.18),transparent_62%)]"
+              />
+              <div className="relative">
+                <p className="flex items-center gap-2 font-utility text-[10px] font-semibold uppercase tracking-[0.18em] text-gold">
+                  <Target className="size-3.5" aria-hidden="true" />
+                  {teacher.formula.label}
+                </p>
+                {/* Each term is one token carrying both languages, so the Hindi
+                    sits under its own English word instead of on a second line
+                    the reader has to map back themselves. */}
+                <div className="mt-4 flex flex-wrap items-center gap-x-2.5 gap-y-3 sm:gap-x-3.5">
+                  {teacher.formula.terms.map((term, index) => (
+                    <Fragment key={term.en}>
+                      {index > 0 ? <Operator sign="+" /> : null}
+                      <FormulaTerm term={term} />
+                    </Fragment>
+                  ))}
+                  <Operator sign="=" />
+                  <FormulaTerm term={teacher.formula.result} accent />
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        ) : null}
+
+        <Reveal delay={420}>
           <blockquote className="mt-8 border-l-2 border-gold pl-5 text-lg italic leading-[1.5] text-gold-bright">
             &ldquo;{teacher.quote}&rdquo;
           </blockquote>
         </Reveal>
       </div>
     </div>
+  );
+}
+
+/** Read out, not hidden: without the plus and equals it is a list, not a formula. */
+function Operator({ sign }: { sign: string }) {
+  return (
+    <span className="font-display text-2xl leading-none text-gold/70 sm:text-3xl">{sign}</span>
+  );
+}
+
+/** One term of the formula: the English word with its Hindi directly beneath. */
+function FormulaTerm({
+  term,
+  accent = false,
+}: {
+  term: { en: string; hi: string };
+  accent?: boolean;
+}) {
+  return (
+    <span
+      className={cn(
+        "flex flex-col items-center rounded-xl border px-3 py-2 text-center sm:px-4",
+        accent ? "border-gold bg-gold-fill text-on-gold" : "border-gold/25 bg-panel text-heading",
+      )}
+    >
+      <span className="font-display text-lg uppercase leading-none tracking-wide sm:text-xl">
+        {term.en}
+      </span>
+      <span
+        lang="hi"
+        className={cn(
+          "mt-1 font-devanagari text-sm font-bold leading-tight sm:text-base",
+          accent ? "text-on-gold/80" : "text-gold-bright",
+        )}
+      >
+        {term.hi}
+      </span>
+    </span>
   );
 }

@@ -346,6 +346,16 @@ export type Teacher = {
   /** Written in the teacher's own voice. */
   note: string;
   quote: string;
+  /**
+   * The teacher's own formula, one term at a time. Each term carries both
+   * languages so the Hindi can sit directly under its English counterpart —
+   * a parent reading either one gets the whole equation.
+   */
+  formula?: {
+    label: string;
+    terms: { en: string; hi: string }[];
+    result: { en: string; hi: string };
+  };
 };
 
 export const faculty: Teacher[] = [
@@ -358,6 +368,15 @@ export const faculty: Teacher[] = [
     badges: ["CTET Qualified", "MPPSC Pre Qualified"],
     note: "I teach the way I wish I had been taught. One idea at a time, with an example from something the student already knows — a cricket score, a shop bill, a bus timing. If a child cannot explain it back to me in their own words, we have not finished the topic. I would rather cover less and have it stay.",
     quote: "A student who understands the 'why' never forgets the 'what'.",
+    formula: {
+      label: "His formula for teaching",
+      terms: [
+        { en: "Goal", hi: "लक्ष्य" },
+        { en: "Focus", hi: "एकाग्रता" },
+        { en: "Hard Work", hi: "मेहनत" },
+      ],
+      result: { en: "Success", hi: "सफलता" },
+    },
   },
 ];
 
