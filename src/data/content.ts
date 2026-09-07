@@ -281,7 +281,7 @@ export const courseTabs: CourseTab[] = [
   {
     id: "class-9-10",
     label: "Class 9 – Class 10",
-    tagline: "Board-ready, one week at a time.",
+    tagline: "From Classroom to Boardroom Success",
     image: "/assets/test-day.webp",
     alt: "Students writing a weekly test on the classroom floor mats",
     subjects: [
