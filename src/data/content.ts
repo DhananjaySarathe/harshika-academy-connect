@@ -310,7 +310,7 @@ export const courseTabs: CourseTab[] = [
   {
     id: "navodaya",
     label: "Navodaya Prep",
-    tagline: "The entrance, prepared for properly.",
+    tagline: "Your Dream School Starts Here.",
     image: "/assets/navodaya-results.webp",
     alt: "Navodaya Test 1 results on the whiteboard, with students holding their answer sheets",
     subjects: [
