@@ -458,20 +458,6 @@ export const results: ResultCard[] = [
     image: "/assets/students/akshita-goswami.webp",
   },
   {
-    name: "Yashvardan Rajput",
-    className: "Class 2",
-    result: "Rank 2",
-    initials: "YR",
-    image: "/assets/students/yashvardan-rajput.webp",
-  },
-  {
-    name: "Harshika Sarathe",
-    className: "KG 1",
-    result: "Rank 1",
-    initials: "HS",
-    image: "/assets/students/harshika-sarathe.webp",
-  },
-  {
     name: "Yash Maheswari",
     className: "Class 3",
     result: "91%",
